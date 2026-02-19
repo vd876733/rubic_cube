@@ -1,1 +1,1 @@
-# rubic_cube
+# rubic_cube_Solver
