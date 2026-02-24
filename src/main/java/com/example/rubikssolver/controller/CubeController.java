@@ -21,6 +21,7 @@ public class CubeController {
      * @param cubeState a 54-character string representing the current cube state
      * @return a list of steps to solve the cube
      */
+    //new
     @PostMapping("/solve")
     public List<Step> solve(@RequestBody String cubeState) {
         return solverService.getSolution(cubeState);
