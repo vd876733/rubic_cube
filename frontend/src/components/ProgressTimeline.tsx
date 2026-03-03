@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import { useMemo } from 'react'
 import classNames from 'classnames'
 
 interface ProgressTimelineProps {
@@ -13,7 +13,7 @@ export const ProgressTimeline: React.FC<ProgressTimelineProps> = ({
   onStepClick,
 }) => {
   const timelineItems = useMemo(() => {
-    return steps.map((step, idx) => ({
+    return steps.map((step: string, idx: number) => ({
       index: idx,
       label: step,
       isActive: idx === currentStep,
@@ -34,7 +34,7 @@ export const ProgressTimeline: React.FC<ProgressTimelineProps> = ({
       {/* Timeline */}
       <div className="flex-1 p-6">
         <div className="space-y-2">
-          {timelineItems.map((item, idx) => (
+          {timelineItems.map((item: any, idx: number) => (
             <div
               key={item.index}
               className="relative"

@@ -1,4 +1,4 @@
-import React, { useMemo, useRef, useCallback } from 'react'
+import { useMemo, useRef, useCallback } from 'react'
 import * as THREE from 'three'
 import { RoundedBoxGeometry } from 'three/examples/jsm/geometries/RoundedBoxGeometry'
 
@@ -39,7 +39,7 @@ export const Cubie: React.FC<CubieProps> = ({
   const mouse = useMemo(() => new THREE.Vector2(), [])
 
   const handlePointerMove = useCallback(
-    (event: React.PointerEvent<HTMLDivElement>) => {
+    (event: any) => {
       if (!isInteractive || !groupRef.current) return
 
       mouse.x = (event.clientX / window.innerWidth) * 2 - 1
@@ -51,7 +51,7 @@ export const Cubie: React.FC<CubieProps> = ({
   )
 
   const handlePointerClick = useCallback(
-    (event: React.PointerEvent<HTMLDivElement>) => {
+    (event: any) => {
       if (!isInteractive || !groupRef.current) return
 
       mouse.x = (event.clientX / window.innerWidth) * 2 - 1
@@ -76,20 +76,25 @@ export const Cubie: React.FC<CubieProps> = ({
 
   const faceMeshes = useMemo(() => {
     const size = 0.95
-    const meshes = facelets.map((color, index) => {
+    const meshes = facelets.map((color: string, index: number) => {
       const geometry = new THREE.PlaneGeometry(size, size)
+      const hexColor = FACE_COLORS[color] || '#CCCCCC'
+      
+      // Create material with enhanced emissive properties for neon glow effect
       const material = new THREE.MeshStandardMaterial({
-        color: FACE_COLORS[color] || '#CCCCCC',
-        emissive: FACE_COLORS[color] || '#CCCCCC',
-        emissiveIntensity: 1.5,
-        metalness: 0.3,
-        roughness: 0.4,
+        color: hexColor,
+        emissive: hexColor,
+        emissiveIntensity: 1.2, // Glow intensity for Bloom effect
+        metalness: 0.2, // Slight metallic sheen
+        roughness: 0.3, // Smooth surface for reflections
         side: THREE.FrontSide,
+        flatShading: true, // Crisp sticker appearance
       })
 
       const mesh = new THREE.Mesh(geometry, material)
       mesh.position.copy(FACE_NORMALS[index].multiplyScalar(0.5))
       mesh.lookAt(FACE_NORMALS[index])
+      mesh.userData.originalEmissiveIntensity = 1.2 // Store for blinking effects
 
       return mesh
     })
@@ -98,7 +103,7 @@ export const Cubie: React.FC<CubieProps> = ({
   }, [facelets])
 
   return (
-    <group ref={groupRef} position={position} onPointerMove={handlePointerMove} onPointerClick={handlePointerClick}>
+    <group ref={groupRef} position={position} onPointerMove={handlePointerMove} onClick={handlePointerClick}>
       {/* Black edge/frame */}
       <mesh geometry={new RoundedBoxGeometry(1, 1, 1, 4, 0.05)}>
         <meshStandardMaterial
@@ -111,8 +116,8 @@ export const Cubie: React.FC<CubieProps> = ({
       </mesh>
 
       {/* Facelets */}
-      {faceMeshes.map((mesh, idx) => (
-        <primitive key={idx} object={mesh} ref={(el) => (cubiesRef.current[idx] = el)} />
+      {faceMeshes.map((mesh: THREE.Mesh, idx: number) => (
+        <primitive key={idx} object={mesh} ref={(el: any) => (cubiesRef.current[idx] = el)} />
       ))}
     </group>
   )

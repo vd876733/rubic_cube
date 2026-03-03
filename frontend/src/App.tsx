@@ -1,10 +1,7 @@
-import React, { useRef, useCallback, useState, useEffect } from 'react'
+import { useRef, useCallback, useState, useEffect } from 'react'
 import useSolverStore from './store/solverStore'
 import { cubeAPI } from './utils/api'
-import { ProgressTimeline } from './components/ProgressTimeline'
-import { CanvasContainer } from './components/CanvasContainer'
-import { AlgorithmDetails } from './components/AlgorithmDetails'
-import { ControlPanel } from './components/ControlPanel'
+import { ProgressTimeline, CanvasContainer, AlgorithmDetails, ControlPanel } from './components' 
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(false)
@@ -25,7 +22,7 @@ export default function App() {
   } = useSolverStore()
 
   const instructorCubeRef = useRef<any>(null)
-  const playbackIntervalRef = useRef<NodeJS.Timeout | null>(null)
+  const playbackIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null)
 
   // Handle solving the cube
   const handleSolve = useCallback(async () => {
@@ -52,14 +49,11 @@ export default function App() {
   useEffect(() => {
     if (isPlaying) {
       playbackIntervalRef.current = setInterval(() => {
-        setCurrentStepIndex((prev) => {
-          if (prev < steps.length - 1) {
-            return prev + 1
-          } else {
-            setIsPlaying(false)
-            return prev
-          }
-        })
+        if (currentStepIndex < steps.length - 1) {
+          setCurrentStepIndex(currentStepIndex + 1)
+        } else {
+          setIsPlaying(false)
+        }
       }, 1500) // 1.5 seconds per move
     } else {
       if (playbackIntervalRef.current) {
