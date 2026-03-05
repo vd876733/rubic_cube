@@ -1,6 +1,6 @@
 import { useRef, useCallback, useState, forwardRef, useImperativeHandle, useEffect } from 'react'
 import { CubeScene } from '../scenes/CubeScene'
-import { Palette } from './Palette'
+import { ColorPalette } from './ColorPalette'  // neon colors palette
 
 /**
  * CubeSceneHandle - Interface for imperative methods exposed by CubeScene
