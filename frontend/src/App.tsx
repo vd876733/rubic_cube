@@ -1,7 +1,12 @@
 import { useRef, useCallback, useState, useEffect } from 'react'
 import useSolverStore from './store/solverStore'
 import { cubeAPI } from './utils/api'
-import { ProgressTimeline, CanvasContainer, AlgorithmDetails, ControlPanel } from './components' 
+import { ProgressTimeline, CanvasContainer, AlgorithmDetails, ControlPanel } from './components'
+
+interface CanvasContainerHandle {
+  mirrorCube: any
+  instructorCube: any
+} 
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(false)
@@ -22,6 +27,7 @@ export default function App() {
   } = useSolverStore()
 
   const instructorCubeRef = useRef<any>(null)
+  const canvasContainerRef = useRef<CanvasContainerHandle>(null)
   const playbackIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null)
 
   // Handle solving the cube
@@ -70,18 +76,18 @@ export default function App() {
 
   // Execute instructor cube animations when current step changes
   useEffect(() => {
-    if (currentStepIndex < steps.length && instructorCubeRef.current) {
+    if (currentStepIndex < steps.length && canvasContainerRef.current?.instructorCube) {
       const step = steps[currentStepIndex]
       
       // Animate the cube rotation
-      instructorCubeRef.current.rotateCube(
+      canvasContainerRef.current.instructorCube.rotateCube(
         step.rotationAxis,
         step.rotationAmount,
         0.6
       )
 
       // Blink the face being rotated
-      instructorCubeRef.current.blinkFace(step.faceIndex, 0.5)
+      canvasContainerRef.current.instructorCube.blinkFace(step.faceIndex, 0.5)
     }
   }, [currentStepIndex, steps])
 
@@ -114,6 +120,7 @@ export default function App() {
         <div className="flex flex-col gap-4 overflow-hidden">
           {/* Canvas Container */}
           <CanvasContainer
+            ref={canvasContainerRef}
             cubeState={cubeState}
             onMirrorStickerChange={handleMirrorStickerChange}
           />
@@ -140,6 +147,8 @@ export default function App() {
           <AlgorithmDetails
             moves={moves}
             currentMoveIndex={currentStepIndex}
+            steps={steps}
+            cubeRefs={canvasContainerRef}
             onMoveClick={setCurrentStepIndex}
           />
         </div>

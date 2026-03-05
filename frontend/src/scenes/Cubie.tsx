@@ -9,13 +9,14 @@ interface CubieProps {
   isInteractive?: boolean
 }
 
+// Standard Rubik's Cube colors with increased saturation for neon effect
 const FACE_COLORS: { [key: string]: string } = {
-  W: '#FFFFFF', // White
-  Y: '#FFFF00', // Yellow
-  B: '#0000FF', // Blue
-  G: '#00DD00', // Green
-  R: '#FF0000', // Red
-  O: '#FFA500', // Orange
+  W: '#F8F8FF', // White
+  Y: '#FFD700', // Golden Yellow (more saturated)
+  B: '#0052CC', // Bright Blue
+  G: '#00AA00', // Vibrant Green
+  R: '#DD0000', // Deep Red
+  O: '#FF6600', // Vibrant Orange
 }
 
 const FACE_NORMALS = [
@@ -84,9 +85,10 @@ export const Cubie: React.FC<CubieProps> = ({
       const material = new THREE.MeshStandardMaterial({
         color: hexColor,
         emissive: hexColor,
-        emissiveIntensity: 1.2, // Glow intensity for Bloom effect
-        metalness: 0.2, // Slight metallic sheen
-        roughness: 0.3, // Smooth surface for reflections
+        emissiveIntensity: 1.5, // Enhanced glow intensity for Bloom effect
+        metalness: 0.3, // Slight metallic sheen
+        roughness: 0.2, // Smooth surface for reflections
+        toneMapped: false, // Ensure emissive colors aren't tone-mapped
         side: THREE.FrontSide,
         flatShading: true, // Crisp sticker appearance
       })
@@ -94,7 +96,7 @@ export const Cubie: React.FC<CubieProps> = ({
       const mesh = new THREE.Mesh(geometry, material)
       mesh.position.copy(FACE_NORMALS[index].multiplyScalar(0.5))
       mesh.lookAt(FACE_NORMALS[index])
-      mesh.userData.originalEmissiveIntensity = 1.2 // Store for blinking effects
+      mesh.userData.originalEmissiveIntensity = 1.5 // Store for blinking effects
 
       return mesh
     })

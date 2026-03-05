@@ -1,21 +1,142 @@
-import { FC } from 'react'
-
+import { FC, useCallback, useRef, useEffect } from 'react'
+import gsap from 'gsap'
 
 interface AlgorithmDetailsProps {
   moves: string[]
   currentMoveIndex: number
+  steps?: any[]
+  cubeRefs?: React.RefObject<{ mirrorCube: any; instructorCube: any }>
   onMoveClick?: (index: number) => void
 }
 
 /**
  * AlgorithmDetails - Displays the solution steps in a detailed format
  * Shows current step highlighting and allows navigation through the solution
+ * Animates cube rotations using GSAP for smooth 90-degree turns
  */
 export const AlgorithmDetails: FC<AlgorithmDetailsProps> = ({
   moves,
   currentMoveIndex,
+  steps = [],
+  cubeRefs,
   onMoveClick,
 }: AlgorithmDetailsProps) => {
+  const animationRef = useRef<gsap.core.Tween | null>(null)
+  const moveAnimationRef = useRef<Promise<void> | null>(null)
+
+  /**
+   * Animate cube rotations for a specific step
+   * Uses GSAP to create smooth 90-degree rotations
+   */
+  const animateStep = useCallback(
+    async (stepIndex: number) => {
+      if (stepIndex >= steps.length || !cubeRefs?.current?.instructorCube) {
+        return
+      }
+
+      const step = steps[stepIndex]
+      if (!step) return
+
+      const cube = cubeRefs.current.instructorCube
+      const duration = 0.6 // 600ms for smooth rotation
+
+      try {
+        // Animate the cube rotation with GSAP for smooth motion
+        await gsap.to({}, {
+          duration,
+          onComplete: async () => {
+            // Execute the rotation after GSAP animation frame
+            await cube.rotateCube(step.rotationAxis, step.rotationAmount, duration)
+            // Blink the face being rotated
+            cube.blinkFace(step.faceIndex, 0.5)
+          },
+        })
+
+        moveAnimationRef.current = null
+      } catch (error) {
+        console.error('Animation error:', error)
+        moveAnimationRef.current = null
+      }
+    },
+    [steps, cubeRefs]
+  )
+
+  /**
+   * Watch for currentMoveIndex changes and trigger animations
+   * Automatically animates the cube when a new step becomes current
+   */
+  useEffect(() => {
+    // Don't animate if already animating
+    if (moveAnimationRef.current) {
+      return
+    }
+
+    if (currentMoveIndex < steps.length) {
+      const promise = animateStep(currentMoveIndex)
+      moveAnimationRef.current = promise
+    }
+  }, [currentMoveIndex, steps, animateStep])
+
+  /**
+   * handleMoveClick - Trigger navigation when a move is clicked
+   * Smoothly transitions through intermediate steps with GSAP
+   */
+  const handleMoveClick = useCallback(
+    (index: number) => {
+      if (!onMoveClick) return
+
+      // Kill any ongoing step animation
+      if (moveAnimationRef.current) {
+        moveAnimationRef.current = null
+      }
+
+      // Kill timeline animation
+      if (animationRef.current) {
+        animationRef.current.kill()
+      }
+
+      // If moving forward, animate through steps smoothly
+      if (index > currentMoveIndex) {
+        animationRef.current = gsap.to(
+          { step: currentMoveIndex },
+          {
+            step: index,
+            duration: (index - currentMoveIndex) * 0.15, // Fast smooth scrolling
+            ease: 'power2.inOut',
+            onUpdate: function () {
+              const currentStep = Math.round(this.targets()[0].step)
+              if (currentStep !== currentMoveIndex && currentStep !== index) {
+                onMoveClick(currentStep)
+              }
+            },
+            onComplete: () => {
+              onMoveClick(index)
+            },
+          }
+        )
+      } else {
+        // Moving backward, reverse animation
+        animationRef.current = gsap.to(
+          { step: currentMoveIndex },
+          {
+            step: index,
+            duration: (currentMoveIndex - index) * 0.15,
+            ease: 'power2.inOut',
+            onUpdate: function () {
+              const currentStep = Math.round(this.targets()[0].step)
+              if (currentStep !== currentMoveIndex && currentStep !== index) {
+                onMoveClick(currentStep)
+              }
+            },
+            onComplete: () => {
+              onMoveClick(index)
+            },
+          }
+        )
+      }
+    },
+    [currentMoveIndex, onMoveClick]
+  )
   if (moves.length === 0) {
     return (
       <div className="h-full flex items-center justify-center text-gray-400">
@@ -41,7 +162,7 @@ export const AlgorithmDetails: FC<AlgorithmDetailsProps> = ({
           {moves.map((move: string, index: number) => (
             <div
               key={index}
-              onClick={() => onMoveClick?.(index)}
+              onClick={() => handleMoveClick(index)}
               className={`p-3 rounded-lg cursor-pointer transition-all ${
                 index === currentMoveIndex
                   ? 'bg-purple-500/30 border border-purple-500/50 shadow-[0_0_15px_rgba(168,85,247,0.2)]'

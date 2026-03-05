@@ -1,5 +1,5 @@
-import { useRef, forwardRef, useImperativeHandle, useMemo } from 'react'
-import { Canvas } from '@react-three/fiber'
+import { useRef, forwardRef, useImperativeHandle, useMemo, useEffect } from 'react'
+import { Canvas, useFrame } from '@react-three/fiber'
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei'
 import { EffectComposer, Bloom } from '@react-three/postprocessing'
 import * as THREE from 'three'
@@ -16,13 +16,15 @@ interface CubeSceneProps {
   isMirror?: boolean
   onStickerChange?: (faceIndex: number, newColor: string) => void
   onRotate?: (axis: 'x' | 'y' | 'z', angle: number, duration: number) => void
+  onCameraSync?: (cameraPos: [number, number, number], zoom: number) => void
 }
 
 const CubeContent = forwardRef<CubeSceneRef, CubeSceneProps>(
-  ({ cubeState, isMirror = false, onStickerChange, onRotate }, ref) => {
+  ({ cubeState, isMirror = false, onStickerChange, onRotate, onCameraSync }, ref) => {
     const cubeGroupRef = useRef<THREE.Group>(null)
     const faceMeshesRef = useRef<THREE.Mesh[]>([])
     const controlsRef = useRef<any>(null)
+    const lastCameraStateRef = useRef<{ pos: [number, number, number]; zoom: number } | null>(null)
 
     // Parse cube state into 54-character representation
     const parseCubeState = (state: string) => {
@@ -53,18 +55,48 @@ const CubeContent = forwardRef<CubeSceneRef, CubeSceneProps>(
           for (let z = -1; z <= 1; z++) {
             const facelets: string[] = []
 
-            // Right face (x = 1)
-            if (x === 1) facelets.push(faceColors[4][y + 1 + '-' as any] || 'R')
-            // Left face (x = -1)
-            else if (x === -1) facelets.push(faceColors[5][y + 1 + '-' as any] || 'O')
-            // Top face (y = 1)
-            else if (y === 1) facelets.push(faceColors[0][z + 1 + '-' as any] || 'W')
-            // Bottom face (y = -1)
-            else if (y === -1) facelets.push(faceColors[1][z + 1 + '-' as any] || 'Y')
-            // Front face (z = 1)
-            else if (z === 1) facelets.push(faceColors[2][y + 1 + '-' as any] || 'B')
-            // Back face (z = -1)
-            else if (z === -1) facelets.push(faceColors[3][y + 1 + '-' as any] || 'G')
+            // Right face (x = 1) - Red
+            if (x === 1) {
+              const row = (1 - y)
+              const col = (z + 1)
+              const idx = row * 3 + col
+              facelets.push(faceColors[4][idx] || 'R')
+            }
+            // Left face (x = -1) - Orange
+            else if (x === -1) {
+              const row = (1 - y)
+              const col = (1 - z)
+              const idx = row * 3 + col
+              facelets.push(faceColors[5][idx] || 'O')
+            }
+            // Top face (y = 1) - White
+            if (y === 1) {
+              const row = (1 - z)
+              const col = (x + 1)
+              const idx = row * 3 + col
+              facelets.push(faceColors[0][idx] || 'W')
+            }
+            // Bottom face (y = -1) - Yellow
+            if (y === -1) {
+              const row = z + 1
+              const col = (x + 1)
+              const idx = row * 3 + col
+              facelets.push(faceColors[1][idx] || 'Y')
+            }
+            // Front face (z = 1) - Blue
+            if (z === 1) {
+              const row = (1 - y)
+              const col = (x + 1)
+              const idx = row * 3 + col
+              facelets.push(faceColors[2][idx] || 'B')
+            }
+            // Back face (z = -1) - Green
+            if (z === -1) {
+              const row = (1 - y)
+              const col = (1 - x)
+              const idx = row * 3 + col
+              facelets.push(faceColors[3][idx] || 'G')
+            }
 
             result.push({
               position: [x * 1.2, y * 1.2, z * 1.2],
@@ -175,14 +207,45 @@ const CubeContent = forwardRef<CubeSceneRef, CubeSceneProps>(
 
     useImperativeHandle(ref, () => ({ rotateCube, blinkFace, syncCamera }))
 
+    // Setup camera sync listener
+    useEffect(() => {
+      if (!isMirror || !onCameraSync || !controlsRef.current) {
+        return
+      }
+
+      const controls = controlsRef.current
+      const handleChange = () => {
+        const cam = controls.camera
+        const cameraPos: [number, number, number] = [cam.position.x, cam.position.y, cam.position.z]
+        const zoom = cam.zoom
+
+        // Only trigger callback if camera state actually changed
+        if (
+          !lastCameraStateRef.current ||
+          lastCameraStateRef.current.pos[0] !== cameraPos[0] ||
+          lastCameraStateRef.current.pos[1] !== cameraPos[1] ||
+          lastCameraStateRef.current.pos[2] !== cameraPos[2] ||
+          lastCameraStateRef.current.zoom !== zoom
+        ) {
+          lastCameraStateRef.current = { pos: cameraPos, zoom }
+          onCameraSync(cameraPos, zoom)
+        }
+      }
+
+      controls.addEventListener('change', handleChange)
+      return () => controls.removeEventListener('change', handleChange)
+    }, [isMirror, onCameraSync])
+
     return (
       <>
         <PerspectiveCamera makeDefault position={[5, 5, 5]} fov={50} />
         <OrbitControls ref={controlsRef} enableZoom={true} enablePan={false} />
 
-        <ambientLight intensity={0.6} color="#ffffff" />
-        <pointLight position={[10, 10, 10]} intensity={1} color="#ffffff" />
-        <pointLight position={[-10, -10, 10]} intensity={0.5} color="#0099ff" />
+        {/* Professional lighting setup for color visibility and neon glow */}
+        <ambientLight intensity={0.8} color="#ffffff" />
+        <pointLight position={[10, 10, 10]} intensity={1.2} color="#ffffff" />
+        <pointLight position={[-10, -10, 10]} intensity={0.8} color="#0099ff" />
+        <pointLight position={[0, 10, 0]} intensity={0.6} color="#ff0099" />
 
         <group ref={cubeGroupRef}>
           {cubies.map((cubie: CubieData, idx: number) => (
@@ -202,8 +265,8 @@ const CubeContent = forwardRef<CubeSceneRef, CubeSceneProps>(
 
         <EffectComposer>
           <Bloom
-            intensity={1.5}
-            luminanceThreshold={0.2}
+            intensity={1.8}
+            luminanceThreshold={0.1}
             luminanceSmoothing={0.9}
             mipmapBlur={true}
             levels={6}
@@ -218,8 +281,8 @@ CubeContent.displayName = 'CubeContent'
 
 export const CubeScene = forwardRef<
   CubeSceneRef,
-  { cubeState: string; isMirror?: boolean; onStickerChange?: (faceIndex: number, newColor: string) => void; onRotate?: (axis: 'x' | 'y' | 'z', angle: number, duration: number) => void }
->(({ cubeState, isMirror, onStickerChange, onRotate }, ref) => {
+  { cubeState: string; isMirror?: boolean; onStickerChange?: (faceIndex: number, newColor: string) => void; onRotate?: (axis: 'x' | 'y' | 'z', angle: number, duration: number) => void; onCameraSync?: (cameraPos: [number, number, number], zoom: number) => void }
+>(({ cubeState, isMirror, onStickerChange, onRotate, onCameraSync }, ref) => {
   return (
     <Canvas
       gl={{
@@ -228,7 +291,7 @@ export const CubeScene = forwardRef<
         powerPreference: 'high-performance',
       }}
     >
-      <CubeContent ref={ref} cubeState={cubeState} isMirror={isMirror} onStickerChange={onStickerChange} onRotate={onRotate} />
+      <CubeContent ref={ref} cubeState={cubeState} isMirror={isMirror} onStickerChange={onStickerChange} onRotate={onRotate} onCameraSync={onCameraSync} />
     </Canvas>
   )
 })
