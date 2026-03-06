@@ -106,50 +106,40 @@ export default function App() {
   return (
     <div className="w-full h-screen bg-dark-bg overflow-hidden">
       {/* Main Grid Layout */}
-      <div className="grid grid-cols-[300px_1fr_300px] gap-4 p-4 h-full">
+      <div className="grid grid-cols-[200px_5fr_200px] gap-4 p-4 h-full">
         {/* Left Panel - Progress Timeline */}
-        <div className="overflow-hidden">
-          <ProgressTimeline
-            steps={progressSteps}
-            currentStep={currentStepIndex}
-            onStepClick={setCurrentStepIndex}
-          />
+        <div className="flex flex-col gap-4 overflow-hidden backdrop-blur-xl bg-slate-900/40 rounded-lg border border-white/10">
+          <div className="flex-1 overflow-hidden">
+            <ProgressTimeline
+              steps={progressSteps}
+              currentStep={currentStepIndex}
+              onStepClick={setCurrentStepIndex}
+            />
+          </div>
         </div>
 
-        {/* Center Panel - Dual 3D Canvases + Control */}
-        <div className="flex flex-col gap-4 overflow-hidden">
-          {/* Canvas Container */}
+        {/* Center Panel - Dual 3D Canvases */}
+        <div className="overflow-hidden">
           <CanvasContainer
             ref={canvasContainerRef}
             cubeState={cubeState}
             onMirrorStickerChange={handleMirrorStickerChange}
           />
-
-          {/* Control Panel (Bottom) */}
-          <div className="h-64 overflow-y-auto">
-            <ControlPanel
-              isLoading={isLoading}
-              isPlaying={isPlaying}
-              currentStep={currentStepIndex}
-              totalSteps={steps.length}
-              onSolve={handleSolve}
-              onPlay={() => setIsPlaying(true)}
-              onPause={() => setIsPlaying(false)}
-              onReset={reset}
-              onNext={nextStep}
-              onPrevious={previousStep}
-            />
-          </div>
         </div>
 
-        {/* Right Panel - Algorithm Details */}
-        <div className="overflow-hidden">
-          <AlgorithmDetails
-            moves={moves}
-            currentMoveIndex={currentStepIndex}
-            steps={steps}
-            cubeRefs={canvasContainerRef}
-            onMoveClick={setCurrentStepIndex}
+        {/* Right Panel - Control Panel */}
+        <div className="overflow-hidden backdrop-blur-md bg-slate-900/40 rounded-lg border border-white/10">
+          <ControlPanel
+            isLoading={isLoading}
+            isPlaying={isPlaying}
+            currentStep={currentStepIndex}
+            totalSteps={steps.length}
+            onSolve={handleSolve}
+            onPlay={() => setIsPlaying(true)}
+            onPause={() => setIsPlaying(false)}
+            onReset={reset}
+            onNext={nextStep}
+            onPrevious={previousStep}
           />
         </div>
       </div>

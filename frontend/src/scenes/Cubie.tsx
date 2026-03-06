@@ -5,7 +5,7 @@ import { RoundedBoxGeometry } from 'three/examples/jsm/geometries/RoundedBoxGeom
 interface CubieProps {
   position: [number, number, number]
   facelets: string[]
-  onSticker?: (faceIndex: number, newColor: string) => void
+  onSticker?: (faceIndex: number) => void
   isInteractive?: boolean
 }
 
@@ -65,14 +65,11 @@ export const Cubie: React.FC<CubieProps> = ({
         const intersection = intersects[0]
         const faceIndex = cubiesRef.current.indexOf(intersection.object as THREE.Mesh)
         if (onSticker && faceIndex !== -1) {
-          const currentColor = facelets[faceIndex]
-          const colors = Object.keys(FACE_COLORS)
-          const nextIndex = (colors.indexOf(currentColor) + 1) % colors.length
-          onSticker(faceIndex, colors[nextIndex])
+          onSticker(faceIndex)
         }
       }
     },
-    [isInteractive, facelets, onSticker, raycaster, mouse]
+    [isInteractive, onSticker, raycaster, mouse]
   )
 
   const faceMeshes = useMemo(() => {

@@ -3,6 +3,7 @@ import { Canvas, useFrame } from '@react-three/fiber'
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei'
 import { EffectComposer, Bloom } from '@react-three/postprocessing'
 import * as THREE from 'three'
+import { gsap } from 'gsap'
 import { Cubie } from './Cubie'
 
 interface CubeSceneRef {
@@ -14,7 +15,7 @@ interface CubeSceneRef {
 interface CubeSceneProps {
   cubeState: string
   isMirror?: boolean
-  onStickerChange?: (faceIndex: number, newColor: string) => void
+  onStickerChange?: (faceIndex: number) => void
   onRotate?: (axis: 'x' | 'y' | 'z', angle: number, duration: number) => void
   onCameraSync?: (cameraPos: [number, number, number], zoom: number) => void
 }
@@ -122,35 +123,21 @@ const CubeContent = forwardRef<CubeSceneRef, CubeSceneProps>(
           return
         }
 
-        const start = Date.now()
         const startRotation = {
           x: cubeGroupRef.current.rotation.x,
           y: cubeGroupRef.current.rotation.y,
           z: cubeGroupRef.current.rotation.z,
         }
 
-        const animate = () => {
-          const elapsed = Date.now() - start
-          const progress = Math.min(elapsed / (duration * 1000), 1)
+        const targetRotation = { ...startRotation }
+        targetRotation[axis] += angle
 
-          // Easing function
-          const easeProgress = progress < 0.5 ? 2 * progress * progress : -1 + (4 - 2 * progress) * progress
-
-          const rotation = { ...startRotation }
-          rotation[axis] += angle * easeProgress
-
-          if (cubeGroupRef.current) {
-            cubeGroupRef.current.rotation[axis] = rotation[axis]
-          }
-
-          if (progress < 1) {
-            requestAnimationFrame(animate)
-          } else {
-            resolve()
-          }
-        }
-
-        animate()
+        gsap.to(cubeGroupRef.current.rotation, {
+          [axis]: targetRotation[axis],
+          duration: duration,
+          ease: "power2.inOut",
+          onComplete: resolve,
+        })
       })
     }
 
@@ -181,27 +168,19 @@ const CubeContent = forwardRef<CubeSceneRef, CubeSceneProps>(
         }
 
         const startIntensity = material.emissiveIntensity
-        const start = Date.now()
 
-        const animate = () => {
-          const elapsed = Date.now() - start
-          const halfDuration = duration / 2
-
-          if (elapsed < halfDuration * 1000) {
-            const progress = elapsed / (halfDuration * 1000)
-            material.emissiveIntensity = startIntensity + (3 - startIntensity) * progress
-            requestAnimationFrame(animate)
-          } else if (elapsed < duration * 1000) {
-            const progress = (elapsed - halfDuration * 1000) / (halfDuration * 1000)
-            material.emissiveIntensity = 3 - (3 - startIntensity) * progress
-            requestAnimationFrame(animate)
-          } else {
-            material.emissiveIntensity = startIntensity
-            resolve()
-          }
-        }
-
-        animate()
+        gsap.timeline()
+          .to(material, {
+            emissiveIntensity: startIntensity + 2,
+            duration: duration / 2,
+            ease: "power2.in",
+          })
+          .to(material, {
+            emissiveIntensity: startIntensity,
+            duration: duration / 2,
+            ease: "power2.out",
+            onComplete: resolve,
+          })
       })
     }
 
@@ -238,7 +217,7 @@ const CubeContent = forwardRef<CubeSceneRef, CubeSceneProps>(
 
     return (
       <>
-        <PerspectiveCamera makeDefault position={[5, 5, 5]} fov={50} />
+        <PerspectiveCamera makeDefault position={[3, 3, 3]} fov={50} />
         <OrbitControls ref={controlsRef} enableZoom={true} enablePan={false} />
 
         {/* Professional lighting setup for color visibility and neon glow */}
@@ -256,7 +235,7 @@ const CubeContent = forwardRef<CubeSceneRef, CubeSceneProps>(
               isInteractive={isMirror}
               onSticker={
                 isMirror && onStickerChange
-                  ? (faceIndex: number, newColor: string) => onStickerChange(faceIndex, newColor)
+                  ? (faceIndex: number) => onStickerChange(faceIndex)
                   : undefined
               }
             />
@@ -281,7 +260,7 @@ CubeContent.displayName = 'CubeContent'
 
 export const CubeScene = forwardRef<
   CubeSceneRef,
-  { cubeState: string; isMirror?: boolean; onStickerChange?: (faceIndex: number, newColor: string) => void; onRotate?: (axis: 'x' | 'y' | 'z', angle: number, duration: number) => void; onCameraSync?: (cameraPos: [number, number, number], zoom: number) => void }
+  { cubeState: string; isMirror?: boolean; onStickerChange?: (faceIndex: number) => void; onRotate?: (axis: 'x' | 'y' | 'z', angle: number, duration: number) => void; onCameraSync?: (cameraPos: [number, number, number], zoom: number) => void }
 >(({ cubeState, isMirror, onStickerChange, onRotate, onCameraSync }, ref) => {
   return (
     <Canvas

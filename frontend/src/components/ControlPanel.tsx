@@ -122,7 +122,7 @@ export const ControlPanel: React.FC<ControlPanelProps> = ({
         </div>
 
         {/* Control buttons */}
-        <div className="grid grid-cols-2 gap-2">
+        <div className="grid grid-cols-3 gap-2">
           <Button
             onClick={onPrevious}
             disabled={currentStep === 0}
@@ -136,6 +136,13 @@ export const ControlPanel: React.FC<ControlPanelProps> = ({
             variant="primary"
           >
             {isPlaying ? '⏸ Pause' : '▶ Play'}
+          </Button>
+          <Button
+            onClick={onNext}
+            disabled={currentStep >= totalSteps - 1}
+            variant="secondary"
+          >
+            Next ⏭
           </Button>
         </div>
 
