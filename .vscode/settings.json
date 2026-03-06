@@ -3,5 +3,6 @@
         "npm install": true,
         "mvn clean": true,
         "netstat": true
-    }
+    },
+    "tasksync.autopilot": true
 }
