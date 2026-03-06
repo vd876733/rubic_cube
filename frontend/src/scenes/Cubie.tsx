@@ -5,7 +5,8 @@ import { RoundedBoxGeometry } from 'three/examples/jsm/geometries/RoundedBoxGeom
 interface CubieProps {
   position: [number, number, number]
   facelets: string[]
-  onSticker?: (faceIndex: number) => void
+  globalIndices: number[]
+  onSticker?: (globalIndex: number) => void
   isInteractive?: boolean
 }
 
@@ -31,6 +32,7 @@ const FACE_NORMALS = [
 export const Cubie: React.FC<CubieProps> = ({
   position,
   facelets,
+  globalIndices,
   onSticker,
   isInteractive = false,
 }) => {
@@ -63,13 +65,14 @@ export const Cubie: React.FC<CubieProps> = ({
 
       if (intersects.length > 0) {
         const intersection = intersects[0]
-        const faceIndex = cubiesRef.current.indexOf(intersection.object as THREE.Mesh)
-        if (onSticker && faceIndex !== -1) {
-          onSticker(faceIndex)
+        const localFaceIndex = cubiesRef.current.indexOf(intersection.object as THREE.Mesh)
+        if (onSticker && localFaceIndex !== -1 && globalIndices[localFaceIndex] !== undefined) {
+          const globalIndex = globalIndices[localFaceIndex]
+          onSticker(globalIndex)
         }
       }
     },
-    [isInteractive, onSticker, raycaster, mouse]
+    [isInteractive, onSticker, raycaster, mouse, globalIndices]
   )
 
   const faceMeshes = useMemo(() => {
