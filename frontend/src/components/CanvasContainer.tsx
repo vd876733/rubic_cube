@@ -4,7 +4,7 @@ import { VerticalPalette } from './VerticalPalette'  // slim vertical color dock
 
 /**
  * CubeSceneHandle - Interface for imperative methods exposed by CubeScene
- * Allows parent components to control cube animations and effects
+ * Allows parent components to control cube animations and effect
  */
 interface CubeSceneHandle {
   rotateCube: (axis: 'x' | 'y' | 'z', angle: number, duration?: number) => Promise<void>
