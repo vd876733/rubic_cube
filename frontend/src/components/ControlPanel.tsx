@@ -13,7 +13,7 @@ interface ControlPanelProps {
   onNext: () => void
   onPrevious: () => void
 }
-
+ 
 export const ControlPanel: React.FC<ControlPanelProps> = ({
   isLoading,
   isPlaying,
