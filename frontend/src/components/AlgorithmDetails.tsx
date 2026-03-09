@@ -2,7 +2,7 @@ import { FC, useCallback, useRef, useEffect } from 'react'
 import gsap from 'gsap'
 
 interface AlgorithmDetailsProps {
-  moves: string[]
+  moves: string[] 
   currentMoveIndex: number
   steps?: any[]
   cubeRefs?: React.RefObject<{ mirrorCube: any; instructorCube: any }>
