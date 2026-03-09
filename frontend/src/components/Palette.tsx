@@ -4,7 +4,7 @@ interface PaletteProps {
   selectedColor: string | null
   onColorSelect: (color: string) => void
 }
-
+ 
 interface PaletteHandle {
   useCharge: (colorChar: string) => void
 }
