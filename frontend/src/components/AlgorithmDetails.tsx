@@ -6,7 +6,7 @@ interface AlgorithmDetailsProps {
   currentMoveIndex: number
   steps?: any[]
   cubeRefs?: React.RefObject<{ mirrorCube: any; instructorCube: any }>
-  onMoveClick?: (index: number) => void
+  onMoveClick?: (index: number) => void 
 }
 
 /**
