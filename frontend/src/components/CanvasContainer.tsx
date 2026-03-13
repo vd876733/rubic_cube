@@ -1,7 +1,7 @@
 import { useRef, useCallback, useState, forwardRef, useImperativeHandle, useEffect } from 'react'
 import { CubeScene } from '../scenes/CubeScene'
 import { VerticalPalette } from './VerticalPalette'  // slim vertical color dock
-
+ 
 /**
  * CubeSceneHandle - Interface for imperative methods exposed by CubeScene
  * Allows parent components to control cube animations and effect 
