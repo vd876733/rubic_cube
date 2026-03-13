@@ -8,7 +8,7 @@ interface PaletteProps {
 interface PaletteHandle {
   useCharge: (colorChar: string) => void
 }
-
+ 
 const PALETTE_COLORS = [
   { hex: '#ffffff', label: 'White', char: 'W' },
   { hex: '#ffeb3b', label: 'Yellow', char: 'Y' },
