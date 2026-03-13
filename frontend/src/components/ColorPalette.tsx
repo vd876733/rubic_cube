@@ -8,7 +8,7 @@ interface ColorPaletteProps {
 interface ColorPaletteHandle {
   useCharge: (colorChar: string) => void
 } 
-
+ 
 // six neon colors in a universal cube palette
 const PALETTE_COLORS = [
   { hex: '#FFFFFF', label: 'White', char: 'W' },
