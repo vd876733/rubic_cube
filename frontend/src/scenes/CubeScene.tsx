@@ -1,16 +1,7 @@
-import { useRef, forwardRef, useImperativeHandle, useMemo, useEffect } from 'react'
-<<<<<<< HEAD
-import { Canvas } from '@react-three/fiber'
-import { OrbitControls, PerspectiveCamera } from '@react-three/drei'
-import { EffectComposer, Bloom } from '@react-three/postprocessing'
-import * as THREE from 'three'
-import type { OrbitControls as OrbitControlsImpl } from 'three-stdlib'
-=======
 import { Canvas, useFrame } from '@react-three/fiber'
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei'
 import { EffectComposer, Bloom } from '@react-three/postprocessing'
 import * as THREE from 'three'
->>>>>>> 193caf26bf187b01d88eec40839f915b991654d8
 import { gsap } from 'gsap'
 import { Cubie } from './Cubie'
 
@@ -32,11 +23,7 @@ const CubeContent = forwardRef<CubeSceneRef, CubeSceneProps>(
   ({ cubeState, isMirror = false, onStickerChange, onRotate, onCameraSync }, ref) => {
     const cubeGroupRef = useRef<THREE.Group>(null)
     const faceMeshesRef = useRef<THREE.Mesh[]>([])
-<<<<<<< HEAD
-    const controlsRef = useRef<OrbitControlsImpl | null>(null)
-=======
     const controlsRef = useRef<any>(null)
->>>>>>> 193caf26bf187b01d88eec40839f915b991654d8
     const lastCameraStateRef = useRef<{ pos: [number, number, number]; zoom: number } | null>(null)
 
     // Parse cube state into 54-character representation
