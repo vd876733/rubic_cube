@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import React, { useMemo } from 'react'
 import classNames from 'classnames'
 
 interface ProgressTimelineProps {
@@ -15,14 +15,6 @@ type TimelineItem = {
   isCompleted: boolean
 }
 
-export function ProgressTimeline({
-  steps,
-  currentStep,
-  onStepClick,
-}: ProgressTimelineProps) {
-  const timelineItems = useMemo<TimelineItem[]>(() => {
-    return steps.map((step, idx) => ({
-=======
 export const ProgressTimeline: React.FC<ProgressTimelineProps> = ({
   steps,
   currentStep,
@@ -30,7 +22,6 @@ export const ProgressTimeline: React.FC<ProgressTimelineProps> = ({
 }) => {
   const timelineItems = useMemo(() => {
     return steps.map((step: string, idx: number) => ({
->>>>>>> 193caf26bf187b01d88eec40839f915b991654d8
       index: idx,
       label: step,
       isActive: idx === currentStep,
