@@ -1,0 +1,172 @@
+import { useRef, useCallback, useState, useEffect } from 'react'
+import useSolverStore from './store/solverStore'
+import { cubeAPI } from './utils/api'
+import { ProgressTimeline, CanvasContainer, ControlPanel } from './components'
+
+interface CubeSceneHandle {
+  rotateCube: (axis: 'x' | 'y' | 'z', angle: number, duration?: number) => Promise<void>
+  blinkFace: (faceIndex: number, duration?: number) => Promise<void>
+}
+
+interface CanvasContainerHandle {
+  mirrorCube: CubeSceneHandle | null
+  instructorCube: CubeSceneHandle | null
+}
+
+type SolverStep = {
+  move: string
+  rotationAxis: 'x' | 'y' | 'z'
+  rotationAmount: number
+  faceIndex: number
+}
+
+export default function App() {
+  const [isLoading, setIsLoading] = useState(false)
+  const [moves, setMoves] = useState<string[]>([])
+
+  const {
+    cubeState,
+    steps,
+    currentStepIndex,
+    isPlaying,
+    setCubeState,
+    setSteps,
+    setCurrentStepIndex,
+    setIsPlaying,
+    nextStep,
+    previousStep,
+    reset,
+  } = useSolverStore()
+
+  const canvasContainerRef = useRef<CanvasContainerHandle>(null)
+  const playbackIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null)
+
+  // Handle solving the cube
+  const handleSolve = useCallback(async () => {
+    setIsLoading(true)
+    try {
+      const response = await cubeAPI.solveCube(cubeState)
+
+      // Extract moves from steps
+      const extractedMoves = response.steps.map((step: SolverStep) => step.move)
+      setMoves(extractedMoves)
+
+      setSteps(response.steps)
+      setCurrentStepIndex(0)
+      setIsPlaying(false)
+    } catch (error) {
+      console.error('Failed to solve cube:', error)
+      alert('Error solving cube. Please check the backend.')
+    } finally {
+      setIsLoading(false)
+    }
+  }, [cubeState, setSteps, setCurrentStepIndex, setIsPlaying])
+
+  // Handle playback
+  useEffect(() => {
+    if (isPlaying) {
+      playbackIntervalRef.current = setInterval(() => {
+        setCurrentStepIndex((prev) => {
+          if (prev < steps.length - 1) {
+            return prev + 1
+          }
+          setIsPlaying(false)
+          return prev
+        })
+      }, 1500) // 1.5 seconds per move
+    } else {
+      if (playbackIntervalRef.current) {
+        clearInterval(playbackIntervalRef.current)
+      }
+    }
+
+    return () => {
+      if (playbackIntervalRef.current) {
+        clearInterval(playbackIntervalRef.current)
+      }
+    }
+  }, [isPlaying, steps.length, setCurrentStepIndex, setIsPlaying])
+
+  // Execute instructor cube animations when current step changes
+  useEffect(() => {
+    if (currentStepIndex < steps.length && canvasContainerRef.current?.instructorCube) {
+      const step = steps[currentStepIndex]
+      
+      // Animate the cube rotation
+      canvasContainerRef.current.instructorCube.rotateCube(
+        step.rotationAxis,
+        step.rotationAmount,
+        0.6
+      )
+
+      // Blink the face being rotated
+      canvasContainerRef.current.instructorCube.blinkFace(step.faceIndex, 0.5)
+    }
+  }, [currentStepIndex, steps])
+
+  const handleMirrorStickerChange = useCallback(
+    (faceIndex: number, newColor: string) => {
+      const newState = cubeState.split('')
+      newState[faceIndex] = newColor
+      setCubeState(newState.join(''))
+    },
+    [cubeState, setCubeState]
+  )
+
+  // Generate progress steps labels
+  const progressSteps = moves.map((move, idx) => `${idx + 1}. ${move}`)
+
+  return (
+    <div className="w-full h-screen bg-dark-bg overflow-hidden">
+      {/* Main Grid Layout */}
+      <div className="grid grid-cols-[200px_5fr_200px] gap-4 p-4 h-full">
+        {/* Left Panel - Progress Timeline */}
+        <div className="flex flex-col gap-4 overflow-hidden backdrop-blur-xl bg-slate-900/40 rounded-lg border border-white/10">
+          <div className="flex-1 overflow-hidden">
+            <ProgressTimeline
+              steps={progressSteps}
+              currentStep={currentStepIndex}
+              onStepClick={setCurrentStepIndex}
+            />
+          </div>
+        </div>
+
+        {/* Center Panel - Dual 3D Canvases */}
+        <div className="overflow-hidden">
+          <CanvasContainer
+            ref={canvasContainerRef}
+            cubeState={cubeState}
+            onMirrorStickerChange={handleMirrorStickerChange}
+          />
+        </div>
+
+        {/* Right Panel - Control Panel */}
+        <div className="overflow-hidden backdrop-blur-md bg-slate-900/40 rounded-lg border border-white/10">
+          <ControlPanel
+            isLoading={isLoading}
+            isPlaying={isPlaying}
+            currentStep={currentStepIndex}
+            totalSteps={steps.length}
+            onSolve={handleSolve}
+            onPlay={() => setIsPlaying(true)}
+            onPause={() => setIsPlaying(false)}
+            onReset={reset}
+            onNext={nextStep}
+            onPrevious={previousStep}
+          />
+        </div>
+      </div>
+
+      {/* Loading Overlay */}
+      {isLoading && (
+        <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50">
+          <div className="glass-panel p-8 text-center space-y-4">
+            <div className="w-12 h-12 border-4 border-neon-cyan border-t-transparent rounded-full animate-spin mx-auto" />
+            <p className="text-lg font-semibold text-neon-cyan">Solving your cube...</p>
+            <p className="text-sm text-gray-400">This may take a moment</p>
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}

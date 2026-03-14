@@ -22,5 +22,10 @@ Thumbs.db
 data
 .mvn/
 
+# Build artifacts
+/rubic_cube-main/target/
+/rubic_cube-main/frontend/node_modules/
+/rubic_cube-main/node_modules/
+
 # Others
 *.swp
