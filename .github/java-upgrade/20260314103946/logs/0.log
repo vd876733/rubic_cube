@@ -1,0 +1,515 @@
+2026-03-14T10:39:46.404Z [INFO] ----------------------invoke report_event----------------------
+2026-03-14T10:39:46.413Z [INFO] [Tool.invoke]({name: report_event, input: {
+  "projectPath": "c:\\Users\\Asus\\OneDrive\\Desktop\\boss folder\\sigma web d\\rubic_cube-main",
+  "event": "precheckCompleted",
+  "phase": "precheck",
+  "status": "succeeded"
+}}).
+2026-03-14T10:39:46.414Z [INFO] [Tool.invoke] do invoke.
+2026-03-14T10:39:46.428Z [INFO] [Tool.invoke]({result: {
+  "message": "Event 'precheckCompleted' reported!\nSession ID: 20260314103946,\nSession Dir: c:\\Users\\Asus\\OneDrive\\Desktop\\boss folder\\sigma web d\\rubic_cube-main\\.github\\java-upgrade\\20260314103946"
+}}).
+2026-03-14T10:39:46.429Z [INFO] ----------------------invoked report_event----------------------
+2026-03-14T10:44:21.153Z [INFO] ---------------------prepare report_event----------------------
+2026-03-14T10:44:21.154Z [INFO] [Tool.prepareInvocation]({name: report_event, input: {
+  "sessionId": "20260314103946",
+  "projectPath": "c:\\Users\\Asus\\OneDrive\\Desktop\\boss folder\\sigma web d\\rubic_cube-main",
+  "event": "planInitialized",
+  "phase": "plan",
+  "status": "succeeded"
+}}).
+2026-03-14T10:44:21.155Z [INFO] [Tool.prepareInvocation] do prepare invocation.
+2026-03-14T10:44:21.156Z [INFO] [Tool.prepareInvocation]({result: {
+  "invocationMessage": "Report upgrade event"
+}}).
+2026-03-14T10:44:21.157Z [INFO] ----------------------prepared report_event----------------------
+2026-03-14T10:44:21.250Z [INFO] ----------------------invoke report_event----------------------
+2026-03-14T10:44:21.251Z [INFO] [Tool.invoke]({name: report_event, input: {
+  "sessionId": "20260314103946",
+  "projectPath": "c:\\Users\\Asus\\OneDrive\\Desktop\\boss folder\\sigma web d\\rubic_cube-main",
+  "event": "planInitialized",
+  "phase": "plan",
+  "status": "succeeded"
+}}).
+2026-03-14T10:44:21.251Z [INFO] [Tool.invoke] do invoke.
+2026-03-14T10:44:21.253Z [INFO] [Tool.invoke]({result: {
+  "message": "Event 'planInitialized' reported!\nSession ID: 20260314103946,\nSession Dir: c:\\Users\\Asus\\OneDrive\\Desktop\\boss folder\\sigma web d\\rubic_cube-main\\.github\\java-upgrade\\20260314103946"
+}}).
+2026-03-14T10:44:21.254Z [INFO] ----------------------invoked report_event----------------------
+2026-03-14T10:44:25.922Z [INFO] ---------------------prepare report_event----------------------
+2026-03-14T10:44:25.923Z [INFO] [Tool.prepareInvocation]({name: report_event, input: {
+  "sessionId": "20260314103946",
+  "projectPath": "c:\\Users\\Asus\\OneDrive\\Desktop\\boss folder\\sigma web d\\rubic_cube-main",
+  "event": "environmentAnalyzed",
+  "phase": "plan",
+  "status": "succeeded"
+}}).
+2026-03-14T10:44:25.924Z [INFO] [Tool.prepareInvocation] do prepare invocation.
+2026-03-14T10:44:25.925Z [INFO] [Tool.prepareInvocation]({result: {
+  "invocationMessage": "Report upgrade event"
+}}).
+2026-03-14T10:44:25.926Z [INFO] ----------------------prepared report_event----------------------
+2026-03-14T10:44:26.008Z [INFO] ----------------------invoke report_event----------------------
+2026-03-14T10:44:26.009Z [INFO] [Tool.invoke]({name: report_event, input: {
+  "sessionId": "20260314103946",
+  "projectPath": "c:\\Users\\Asus\\OneDrive\\Desktop\\boss folder\\sigma web d\\rubic_cube-main",
+  "event": "environmentAnalyzed",
+  "phase": "plan",
+  "status": "succeeded"
+}}).
+2026-03-14T10:44:26.010Z [INFO] [Tool.invoke] do invoke.
+2026-03-14T10:44:26.012Z [INFO] [Tool.invoke]({result: {
+  "message": "Event 'environmentAnalyzed' reported!\nSession ID: 20260314103946,\nSession Dir: c:\\Users\\Asus\\OneDrive\\Desktop\\boss folder\\sigma web d\\rubic_cube-main\\.github\\java-upgrade\\20260314103946"
+}}).
+2026-03-14T10:44:26.013Z [INFO] ----------------------invoked report_event----------------------
+2026-03-14T10:44:30.510Z [INFO] ---------------------prepare report_event----------------------
+2026-03-14T10:44:30.511Z [INFO] [Tool.prepareInvocation]({name: report_event, input: {
+  "sessionId": "20260314103946",
+  "projectPath": "c:\\Users\\Asus\\OneDrive\\Desktop\\boss folder\\sigma web d\\rubic_cube-main",
+  "event": "dependenciesAnalyzed",
+  "phase": "plan",
+  "status": "succeeded"
+}}).
+2026-03-14T10:44:30.513Z [INFO] [Tool.prepareInvocation] do prepare invocation.
+2026-03-14T10:44:30.514Z [INFO] [Tool.prepareInvocation]({result: {
+  "invocationMessage": "Report upgrade event"
+}}).
+2026-03-14T10:44:30.516Z [INFO] ----------------------prepared report_event----------------------
+2026-03-14T10:44:30.835Z [INFO] ----------------------invoke report_event----------------------
+2026-03-14T10:44:30.837Z [INFO] [Tool.invoke]({name: report_event, input: {
+  "sessionId": "20260314103946",
+  "projectPath": "c:\\Users\\Asus\\OneDrive\\Desktop\\boss folder\\sigma web d\\rubic_cube-main",
+  "event": "dependenciesAnalyzed",
+  "phase": "plan",
+  "status": "succeeded"
+}}).
+2026-03-14T10:44:30.838Z [INFO] [Tool.invoke] do invoke.
+2026-03-14T10:44:30.839Z [INFO] [Tool.invoke]({result: {
+  "message": "Event 'dependenciesAnalyzed' reported!\nSession ID: 20260314103946,\nSession Dir: c:\\Users\\Asus\\OneDrive\\Desktop\\boss folder\\sigma web d\\rubic_cube-main\\.github\\java-upgrade\\20260314103946"
+}}).
+2026-03-14T10:44:30.840Z [INFO] ----------------------invoked report_event----------------------
+2026-03-14T10:44:33.634Z [INFO] ---------------------prepare report_event----------------------
+2026-03-14T10:44:33.635Z [INFO] [Tool.prepareInvocation]({name: report_event, input: {
+  "sessionId": "20260314103946",
+  "projectPath": "c:\\Users\\Asus\\OneDrive\\Desktop\\boss folder\\sigma web d\\rubic_cube-main",
+  "event": "upgradePathDesigned",
+  "phase": "plan",
+  "status": "succeeded"
+}}).
+2026-03-14T10:44:33.637Z [INFO] [Tool.prepareInvocation] do prepare invocation.
+2026-03-14T10:44:33.639Z [INFO] [Tool.prepareInvocation]({result: {
+  "invocationMessage": "Report upgrade event"
+}}).
+2026-03-14T10:44:33.640Z [INFO] ----------------------prepared report_event----------------------
+2026-03-14T10:44:33.865Z [INFO] ----------------------invoke report_event----------------------
+2026-03-14T10:44:33.868Z [INFO] [Tool.invoke]({name: report_event, input: {
+  "sessionId": "20260314103946",
+  "projectPath": "c:\\Users\\Asus\\OneDrive\\Desktop\\boss folder\\sigma web d\\rubic_cube-main",
+  "event": "upgradePathDesigned",
+  "phase": "plan",
+  "status": "succeeded"
+}}).
+2026-03-14T10:44:33.869Z [INFO] [Tool.invoke] do invoke.
+2026-03-14T10:44:33.871Z [INFO] [Tool.invoke]({result: {
+  "message": "Event 'upgradePathDesigned' reported!\nSession ID: 20260314103946,\nSession Dir: c:\\Users\\Asus\\OneDrive\\Desktop\\boss folder\\sigma web d\\rubic_cube-main\\.github\\java-upgrade\\20260314103946"
+}}).
+2026-03-14T10:44:33.873Z [INFO] ----------------------invoked report_event----------------------
+2026-03-14T10:44:37.396Z [INFO] ---------------------prepare report_event----------------------
+2026-03-14T10:44:37.398Z [INFO] [Tool.prepareInvocation]({name: report_event, input: {
+  "sessionId": "20260314103946",
+  "projectPath": "c:\\Users\\Asus\\OneDrive\\Desktop\\boss folder\\sigma web d\\rubic_cube-main",
+  "event": "planReviewed",
+  "phase": "plan",
+  "status": "succeeded"
+}}).
+2026-03-14T10:44:37.400Z [INFO] [Tool.prepareInvocation] do prepare invocation.
+2026-03-14T10:44:37.402Z [INFO] [Tool.prepareInvocation]({result: {
+  "invocationMessage": "Report upgrade event"
+}}).
+2026-03-14T10:44:37.404Z [INFO] ----------------------prepared report_event----------------------
+2026-03-14T10:44:37.659Z [INFO] ----------------------invoke report_event----------------------
+2026-03-14T10:44:37.661Z [INFO] [Tool.invoke]({name: report_event, input: {
+  "sessionId": "20260314103946",
+  "projectPath": "c:\\Users\\Asus\\OneDrive\\Desktop\\boss folder\\sigma web d\\rubic_cube-main",
+  "event": "planReviewed",
+  "phase": "plan",
+  "status": "succeeded"
+}}).
+2026-03-14T10:44:37.663Z [INFO] [Tool.invoke] do invoke.
+2026-03-14T10:44:37.666Z [INFO] [Tool.invoke]({result: {
+  "message": "Event 'planReviewed' reported!\nSession ID: 20260314103946,\nSession Dir: c:\\Users\\Asus\\OneDrive\\Desktop\\boss folder\\sigma web d\\rubic_cube-main\\.github\\java-upgrade\\20260314103946"
+}}).
+2026-03-14T10:44:37.668Z [INFO] ----------------------invoked report_event----------------------
+2026-03-14T10:44:41.194Z [INFO] ---------------------prepare confirm_upgrade_plan----------------------
+2026-03-14T10:44:41.196Z [INFO] [Tool.prepareInvocation]({name: confirm_upgrade_plan, input: {
+  "sessionId": "20260314103946"
+}}).
+2026-03-14T10:44:41.197Z [INFO] [Tool.prepareInvocation] do prepare invocation.
+2026-03-14T10:44:41.200Z [INFO] [Tool.prepareInvocation]({result: {
+  "invocationMessage": "Review [upgrade plan](file:///c:/Users/Asus/OneDrive/Desktop/boss folder/sigma web d/rubic_cube-main/.github/java-upgrade/20260314103946/plan.md)",
+  "confirmationMessages": {
+    "title": "Plan generated",
+    "message": "Please review the generated plan and make any necessary adjustments before proceeding. You can modify the generated [`plan.md`](file:///c:/Users/Asus/OneDrive/Desktop/boss folder/sigma web d/rubic_cube-main/.github/java-upgrade/20260314103946/plan.md) directly."
+  }
+}}).
+2026-03-14T10:44:41.202Z [INFO] ----------------------prepared confirm_upgrade_plan----------------------
+2026-03-14T10:45:38.708Z [INFO] ----------------------invoke confirm_upgrade_plan----------------------
+2026-03-14T10:45:38.709Z [INFO] [Tool.invoke]({name: confirm_upgrade_plan, input: {
+  "sessionId": "20260314103946"
+}}).
+2026-03-14T10:45:38.710Z [INFO] [Tool.invoke] do invoke.
+2026-03-14T10:45:38.711Z [INFO] Upgrade plan confirmed successfully.
+2026-03-14T10:45:38.716Z [INFO] [Tool.invoke]({result: {
+  "message": "Generated plan is reviewed and confirmed by the user! the upgrade process will start now and be tracked in markdown file: c:\\Users\\Asus\\OneDrive\\Desktop\\boss folder\\sigma web d\\rubic_cube-main\\.github\\java-upgrade\\20260314103946\\progress.md."
+}}).
+2026-03-14T10:45:38.717Z [INFO] ----------------------invoked confirm_upgrade_plan----------------------
+2026-03-14T10:46:06.747Z [INFO] ---------------------prepare install_jdk----------------------
+2026-03-14T10:46:06.748Z [INFO] [Tool.prepareInvocation]({name: install_jdk, input: {
+  "sessionId": "20260314103946",
+  "version": "21"
+}}).
+2026-03-14T10:46:06.751Z [INFO] [Tool.prepareInvocation] do prepare invocation.
+2026-03-14T10:46:07.725Z [INFO] [Tool.prepareInvocation]({result: {
+  "invocationMessage": "Download and install JDK",
+  "confirmationMessages": {
+    "title": "Download and install JDK",
+    "message": "\nThis tool will download and install JDK 21 from Microsoft with below settings.\n- **Version**: 21\n- **Vendor**: Microsoft\n- **Url**: https://aka.ms/download-jdk/microsoft-jdk-21.0.8-windows-x64.zip\n- **Destination**: `C:\\Users\\Asus\\.jdk`\n- **Checksum**: SHA256: 6ecfa864b95a45cde05d92351edf06d33b778669499b485bb8414145704fae0a\n- **Signature**: https://aka.ms/download-jdk/microsoft-jdk-21.0.8-windows-x64.zip.sig\n- **Public Key**: http://aka.ms/microsoft_jdk_public_key\n"
+  }
+}}).
+2026-03-14T10:46:07.727Z [INFO] ----------------------prepared install_jdk----------------------
+2026-03-14T10:47:43.256Z [INFO] ----------------------invoke install_jdk----------------------
+2026-03-14T10:47:43.257Z [INFO] [Tool.invoke]({name: install_jdk, input: {
+  "sessionId": "20260314103946",
+  "version": "21"
+}}).
+2026-03-14T10:47:43.258Z [INFO] [Tool.invoke] do invoke.
+2026-03-14T10:48:58.931Z [INFO] [Tool.invoke]({result: {
+  "result": {
+    "name": "java",
+    "path": "C:\\Users\\Asus\\.jdk\\jdk-21.0.8\\bin",
+    "version": "21.0.8"
+  },
+  "message": "JDK 21 is installed at C:\\Users\\Asus\\.jdk\\jdk-21.0.8\\bin",
+  "telemetry": {
+    "tool": "JDK",
+    "version": "21"
+  }
+}}).
+2026-03-14T10:48:58.933Z [INFO] ----------------------invoked install_jdk----------------------
+2026-03-14T10:49:18.593Z [INFO] ---------------------prepare report_event----------------------
+2026-03-14T10:49:18.594Z [INFO] [Tool.prepareInvocation]({name: report_event, input: {
+  "sessionId": "20260314103946",
+  "projectPath": "c:\\Users\\Asus\\OneDrive\\Desktop\\boss folder\\sigma web d\\rubic_cube-main",
+  "event": "environmentSetup",
+  "phase": "execute",
+  "status": "succeeded",
+  "details": {
+    "jdkPath": "C:\\Users\\Asus\\.jdk\\jdk-21.0.8\\bin",
+    "buildToolPath": "C:\\apache-maven-3.9.13\\bin\\mvn"
+  }
+}}).
+2026-03-14T10:49:18.595Z [INFO] [Tool.prepareInvocation] do prepare invocation.
+2026-03-14T10:49:18.596Z [INFO] [Tool.prepareInvocation]({result: {
+  "invocationMessage": "Report upgrade event"
+}}).
+2026-03-14T10:49:18.598Z [INFO] ----------------------prepared report_event----------------------
+2026-03-14T10:49:18.779Z [INFO] ----------------------invoke report_event----------------------
+2026-03-14T10:49:18.780Z [INFO] [Tool.invoke]({name: report_event, input: {
+  "sessionId": "20260314103946",
+  "projectPath": "c:\\Users\\Asus\\OneDrive\\Desktop\\boss folder\\sigma web d\\rubic_cube-main",
+  "event": "environmentSetup",
+  "phase": "execute",
+  "status": "succeeded",
+  "details": {
+    "jdkPath": "C:\\Users\\Asus\\.jdk\\jdk-21.0.8\\bin",
+    "buildToolPath": "C:\\apache-maven-3.9.13\\bin\\mvn"
+  }
+}}).
+2026-03-14T10:49:18.781Z [INFO] [Tool.invoke] do invoke.
+2026-03-14T10:49:18.785Z [INFO] Project c:\Users\Asus\OneDrive\Desktop\boss folder\sigma web d\rubic_cube-main is not a maven project, try to get java version from gradle
+2026-03-14T10:49:19.066Z [INFO] Try to get java version from gradle config files: 
+2026-03-14T10:49:19.069Z [INFO] Try to get java version from gradle properties: undefined
+2026-03-14T10:49:19.071Z [INFO] Project java version: 8
+2026-03-14T10:49:19.909Z [ERROR] [ReportEventTool] Failed to send project info telemetry: UserError: Failed to detect build tool for the project at c:\Users\Asus\OneDrive\Desktop\boss folder\sigma web d\rubic_cube-main. There are child Maven/Gradle projects detected: "rubic_cube-main". Would you like to use one of them instead?
+2026-03-14T10:49:19.912Z [INFO] [Tool.invoke]({result: {
+  "message": "Event 'environmentSetup' reported!\nSession ID: 20260314103946,\nSession Dir: c:\\Users\\Asus\\OneDrive\\Desktop\\boss folder\\sigma web d\\rubic_cube-main\\.github\\java-upgrade\\20260314103946"
+}}).
+2026-03-14T10:49:19.913Z [INFO] ----------------------invoked report_event----------------------
+2026-03-14T10:52:11.065Z [INFO] ---------------------prepare report_event----------------------
+2026-03-14T10:52:11.067Z [INFO] [Tool.prepareInvocation]({name: report_event, input: {
+  "sessionId": "20260314103946",
+  "projectPath": "c:\\Users\\Asus\\OneDrive\\Desktop\\boss folder\\sigma web d\\rubic_cube-main",
+  "event": "baselineSetup",
+  "phase": "execute",
+  "status": "succeeded"
+}}).
+2026-03-14T10:52:11.069Z [INFO] [Tool.prepareInvocation] do prepare invocation.
+2026-03-14T10:52:11.071Z [INFO] [Tool.prepareInvocation]({result: {
+  "invocationMessage": "Report upgrade event"
+}}).
+2026-03-14T10:52:11.072Z [INFO] ----------------------prepared report_event----------------------
+2026-03-14T10:52:11.147Z [INFO] ----------------------invoke report_event----------------------
+2026-03-14T10:52:11.148Z [INFO] [Tool.invoke]({name: report_event, input: {
+  "sessionId": "20260314103946",
+  "projectPath": "c:\\Users\\Asus\\OneDrive\\Desktop\\boss folder\\sigma web d\\rubic_cube-main",
+  "event": "baselineSetup",
+  "phase": "execute",
+  "status": "succeeded"
+}}).
+2026-03-14T10:52:11.149Z [INFO] [Tool.invoke] do invoke.
+2026-03-14T10:52:11.150Z [INFO] [Tool.invoke]({result: {
+  "message": "Event 'baselineSetup' reported!\nSession ID: 20260314103946,\nSession Dir: c:\\Users\\Asus\\OneDrive\\Desktop\\boss folder\\sigma web d\\rubic_cube-main\\.github\\java-upgrade\\20260314103946"
+}}).
+2026-03-14T10:52:11.151Z [INFO] ----------------------invoked report_event----------------------
+2026-03-14T10:53:00.823Z [INFO] ---------------------prepare report_event----------------------
+2026-03-14T10:53:00.825Z [INFO] [Tool.prepareInvocation]({name: report_event, input: {
+  "sessionId": "20260314103946",
+  "projectPath": "c:\\Users\\Asus\\OneDrive\\Desktop\\boss folder\\sigma web d\\rubic_cube-main",
+  "event": "upgradeStepStarted",
+  "phase": "execute",
+  "status": "succeeded",
+  "details": {
+    "stepNumber": 3,
+    "stepTitle": "Update project to Java 21"
+  }
+}}).
+2026-03-14T10:53:00.826Z [INFO] [Tool.prepareInvocation] do prepare invocation.
+2026-03-14T10:53:00.827Z [INFO] [Tool.prepareInvocation]({result: {
+  "invocationMessage": "Report upgrade event"
+}}).
+2026-03-14T10:53:00.828Z [INFO] ----------------------prepared report_event----------------------
+2026-03-14T10:53:00.971Z [INFO] ----------------------invoke report_event----------------------
+2026-03-14T10:53:00.972Z [INFO] [Tool.invoke]({name: report_event, input: {
+  "sessionId": "20260314103946",
+  "projectPath": "c:\\Users\\Asus\\OneDrive\\Desktop\\boss folder\\sigma web d\\rubic_cube-main",
+  "event": "upgradeStepStarted",
+  "phase": "execute",
+  "status": "succeeded",
+  "details": {
+    "stepNumber": 3,
+    "stepTitle": "Update project to Java 21"
+  }
+}}).
+2026-03-14T10:53:00.973Z [INFO] [Tool.invoke] do invoke.
+2026-03-14T10:53:00.975Z [INFO] [Tool.invoke]({result: {
+  "message": "Event 'upgradeStepStarted' reported!\nSession ID: 20260314103946,\nSession Dir: c:\\Users\\Asus\\OneDrive\\Desktop\\boss folder\\sigma web d\\rubic_cube-main\\.github\\java-upgrade\\20260314103946"
+}}).
+2026-03-14T10:53:00.976Z [INFO] ----------------------invoked report_event----------------------
+2026-03-14T10:53:04.384Z [INFO] ---------------------prepare report_event----------------------
+2026-03-14T10:53:04.385Z [INFO] [Tool.prepareInvocation]({name: report_event, input: {
+  "sessionId": "20260314103946",
+  "projectPath": "c:\\Users\\Asus\\OneDrive\\Desktop\\boss folder\\sigma web d\\rubic_cube-main",
+  "event": "upgradeStepCompleted",
+  "phase": "execute",
+  "status": "succeeded",
+  "details": {
+    "stepNumber": 3,
+    "stepTitle": "Update project to Java 21",
+    "commitId": "N/A"
+  }
+}}).
+2026-03-14T10:53:04.386Z [INFO] [Tool.prepareInvocation] do prepare invocation.
+2026-03-14T10:53:04.387Z [INFO] [Tool.prepareInvocation]({result: {
+  "invocationMessage": "Report upgrade event"
+}}).
+2026-03-14T10:53:04.389Z [INFO] ----------------------prepared report_event----------------------
+2026-03-14T10:53:04.470Z [INFO] ----------------------invoke report_event----------------------
+2026-03-14T10:53:04.471Z [INFO] [Tool.invoke]({name: report_event, input: {
+  "sessionId": "20260314103946",
+  "projectPath": "c:\\Users\\Asus\\OneDrive\\Desktop\\boss folder\\sigma web d\\rubic_cube-main",
+  "event": "upgradeStepCompleted",
+  "phase": "execute",
+  "status": "succeeded",
+  "details": {
+    "stepNumber": 3,
+    "stepTitle": "Update project to Java 21",
+    "commitId": "N/A"
+  }
+}}).
+2026-03-14T10:53:04.472Z [INFO] [Tool.invoke] do invoke.
+2026-03-14T10:53:04.633Z [INFO] [Tool.invoke]({result: {
+  "message": "Event 'upgradeStepCompleted' reported!\nSession ID: 20260314103946,\nSession Dir: c:\\Users\\Asus\\OneDrive\\Desktop\\boss folder\\sigma web d\\rubic_cube-main\\.github\\java-upgrade\\20260314103946"
+}}).
+2026-03-14T10:53:04.634Z [INFO] ----------------------invoked report_event----------------------
+2026-03-14T10:53:30.407Z [INFO] ---------------------prepare report_event----------------------
+2026-03-14T10:53:30.408Z [INFO] [Tool.prepareInvocation]({name: report_event, input: {
+  "sessionId": "20260314103946",
+  "projectPath": "c:\\Users\\Asus\\OneDrive\\Desktop\\boss folder\\sigma web d\\rubic_cube-main",
+  "event": "upgradeStepStarted",
+  "phase": "execute",
+  "status": "succeeded",
+  "details": {
+    "stepNumber": 4,
+    "stepTitle": "Final Validation"
+  }
+}}).
+2026-03-14T10:53:30.410Z [INFO] [Tool.prepareInvocation] do prepare invocation.
+2026-03-14T10:53:30.411Z [INFO] [Tool.prepareInvocation]({result: {
+  "invocationMessage": "Report upgrade event"
+}}).
+2026-03-14T10:53:30.412Z [INFO] ----------------------prepared report_event----------------------
+2026-03-14T10:53:30.509Z [INFO] ----------------------invoke report_event----------------------
+2026-03-14T10:53:30.510Z [INFO] [Tool.invoke]({name: report_event, input: {
+  "sessionId": "20260314103946",
+  "projectPath": "c:\\Users\\Asus\\OneDrive\\Desktop\\boss folder\\sigma web d\\rubic_cube-main",
+  "event": "upgradeStepStarted",
+  "phase": "execute",
+  "status": "succeeded",
+  "details": {
+    "stepNumber": 4,
+    "stepTitle": "Final Validation"
+  }
+}}).
+2026-03-14T10:53:30.511Z [INFO] [Tool.invoke] do invoke.
+2026-03-14T10:53:30.513Z [INFO] [Tool.invoke]({result: {
+  "message": "Event 'upgradeStepStarted' reported!\nSession ID: 20260314103946,\nSession Dir: c:\\Users\\Asus\\OneDrive\\Desktop\\boss folder\\sigma web d\\rubic_cube-main\\.github\\java-upgrade\\20260314103946"
+}}).
+2026-03-14T10:53:30.514Z [INFO] ----------------------invoked report_event----------------------
+2026-03-14T10:53:33.673Z [INFO] ---------------------prepare report_event----------------------
+2026-03-14T10:53:33.675Z [INFO] [Tool.prepareInvocation]({name: report_event, input: {
+  "sessionId": "20260314103946",
+  "projectPath": "c:\\Users\\Asus\\OneDrive\\Desktop\\boss folder\\sigma web d\\rubic_cube-main",
+  "event": "upgradeValidationCompleted",
+  "phase": "execute",
+  "status": "succeeded",
+  "details": {
+    "stepNumber": 4,
+    "stepTitle": "Final Validation",
+    "commitId": "N/A"
+  }
+}}).
+2026-03-14T10:53:33.676Z [INFO] [Tool.prepareInvocation] do prepare invocation.
+2026-03-14T10:53:33.678Z [INFO] [Tool.prepareInvocation]({result: {
+  "invocationMessage": "Report upgrade event"
+}}).
+2026-03-14T10:53:33.680Z [INFO] ----------------------prepared report_event----------------------
+2026-03-14T10:53:33.793Z [INFO] ----------------------invoke report_event----------------------
+2026-03-14T10:53:33.794Z [INFO] [Tool.invoke]({name: report_event, input: {
+  "sessionId": "20260314103946",
+  "projectPath": "c:\\Users\\Asus\\OneDrive\\Desktop\\boss folder\\sigma web d\\rubic_cube-main",
+  "event": "upgradeValidationCompleted",
+  "phase": "execute",
+  "status": "succeeded",
+  "details": {
+    "stepNumber": 4,
+    "stepTitle": "Final Validation",
+    "commitId": "N/A"
+  }
+}}).
+2026-03-14T10:53:33.794Z [INFO] [Tool.invoke] do invoke.
+2026-03-14T10:53:33.796Z [INFO] [Tool.invoke]({result: {
+  "message": "Event 'upgradeValidationCompleted' reported!\nSession ID: 20260314103946,\nSession Dir: c:\\Users\\Asus\\OneDrive\\Desktop\\boss folder\\sigma web d\\rubic_cube-main\\.github\\java-upgrade\\20260314103946"
+}}).
+2026-03-14T10:53:33.797Z [INFO] ----------------------invoked report_event----------------------
+2026-03-14T10:53:37.745Z [INFO] ---------------------prepare report_event----------------------
+2026-03-14T10:53:37.746Z [INFO] [Tool.prepareInvocation]({name: report_event, input: {
+  "sessionId": "20260314103946",
+  "projectPath": "c:\\Users\\Asus\\OneDrive\\Desktop\\boss folder\\sigma web d\\rubic_cube-main",
+  "event": "planExecutionCompleted",
+  "phase": "execute",
+  "status": "succeeded"
+}}).
+2026-03-14T10:53:37.746Z [INFO] [Tool.prepareInvocation] do prepare invocation.
+2026-03-14T10:53:37.747Z [INFO] [Tool.prepareInvocation]({result: {
+  "invocationMessage": "Report upgrade event"
+}}).
+2026-03-14T10:53:37.749Z [INFO] ----------------------prepared report_event----------------------
+2026-03-14T10:53:39.230Z [INFO] ----------------------invoke report_event----------------------
+2026-03-14T10:53:39.232Z [INFO] [Tool.invoke]({name: report_event, input: {
+  "sessionId": "20260314103946",
+  "projectPath": "c:\\Users\\Asus\\OneDrive\\Desktop\\boss folder\\sigma web d\\rubic_cube-main",
+  "event": "planExecutionCompleted",
+  "phase": "execute",
+  "status": "succeeded"
+}}).
+2026-03-14T10:53:39.233Z [INFO] [Tool.invoke] do invoke.
+2026-03-14T10:53:39.449Z [INFO] [Tool.invoke]({result: {
+  "message": "Event 'planExecutionCompleted' reported!\nSession ID: 20260314103946,\nSession Dir: c:\\Users\\Asus\\OneDrive\\Desktop\\boss folder\\sigma web d\\rubic_cube-main\\.github\\java-upgrade\\20260314103946"
+}}).
+2026-03-14T10:53:39.450Z [INFO] ----------------------invoked report_event----------------------
+2026-03-14T10:54:37.950Z [INFO] ---------------------prepare validate_cves_for_java----------------------
+2026-03-14T10:54:37.951Z [INFO] [Tool.prepareInvocation]({name: validate_cves_for_java, input: {
+  "sessionId": "20260314103946",
+  "projectPath": "c:\\Users\\Asus\\OneDrive\\Desktop\\boss folder\\sigma web d\\rubic_cube-main",
+  "dependencies": [
+    "org.springframework.boot:spring-boot-starter-web:3.2.6",
+    "org.springframework.boot:spring-boot-devtools:3.2.6"
+  ]
+}}).
+2026-03-14T10:54:37.953Z [INFO] [Tool.prepareInvocation] do prepare invocation.
+2026-03-14T10:54:37.954Z [INFO] [Tool.prepareInvocation]({result: {
+  "invocationMessage": "Validate CVEs"
+}}).
+2026-03-14T10:54:37.955Z [INFO] ----------------------prepared validate_cves_for_java----------------------
+2026-03-14T10:54:38.032Z [INFO] ----------------------invoke validate_cves_for_java----------------------
+2026-03-14T10:54:38.033Z [INFO] [Tool.invoke]({name: validate_cves_for_java, input: {
+  "sessionId": "20260314103946",
+  "projectPath": "c:\\Users\\Asus\\OneDrive\\Desktop\\boss folder\\sigma web d\\rubic_cube-main",
+  "dependencies": [
+    "org.springframework.boot:spring-boot-starter-web:3.2.6",
+    "org.springframework.boot:spring-boot-devtools:3.2.6"
+  ]
+}}).
+2026-03-14T10:54:38.034Z [INFO] [Tool.invoke] do invoke.
+2026-03-14T10:54:38.036Z [INFO] Project c:\Users\Asus\OneDrive\Desktop\boss folder\sigma web d\rubic_cube-main is not a maven project, try to get java version from gradle
+2026-03-14T10:54:38.160Z [INFO] Try to get java version from gradle config files: 
+2026-03-14T10:54:38.162Z [INFO] Try to get java version from gradle properties: undefined
+2026-03-14T10:54:38.162Z [INFO] Project java version: 8
+2026-03-14T10:54:38.471Z [ERROR] Failed to create build tool for telemetry at c:\Users\Asus\OneDrive\Desktop\boss folder\sigma web d\rubic_cube-main: UserError: Failed to detect build tool for the project at c:\Users\Asus\OneDrive\Desktop\boss folder\sigma web d\rubic_cube-main. There are child Maven/Gradle projects detected: "rubic_cube-main". Would you like to use one of them instead?
+	at x3e (c:\Users\Asus\.vscode\extensions\vscjava.vscode-java-upgrade-2.0.4\dist\extension.js:381:1757)
+	at async Dft (c:\Users\Asus\.vscode\extensions\vscjava.vscode-java-upgrade-2.0.4\dist\extension.js:381:4211)
+	at async Af.doInvoke (c:\Users\Asus\.vscode\extensions\vscjava.vscode-java-upgrade-2.0.4\dist\extension.js:491:973)
+	at async Af.invoke (c:\Users\Asus\.vscode\extensions\vscjava.vscode-java-upgrade-2.0.4\dist\extension.js:336:6431)
+	at async gvI.invoke (c:\Users\Asus\.vscode\extensions\vscjava.vscode-java-upgrade-2.0.4\dist\extension.js:499:172)
+	at async zQ.$invokeTool (file:///c:/Users/Asus/AppData/Local/Programs/Microsoft%20VS%20Code/c3a26841a8/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:195:3458)
+2026-03-14T10:54:38.472Z [INFO] Getting CVEs for dependencies: org.springframework.boot:spring-boot-starter-web:3.2.6,org.springframework.boot:spring-boot-devtools:3.2.6
+2026-03-14T10:54:38.473Z [INFO] getting CVEs for dependencies:
+ - org.springframework.boot:spring-boot-starter-web:3.2.6
+  - org.springframework.boot:spring-boot-devtools:3.2.6...
+2026-03-14T10:54:38.474Z [INFO] getting gitHub access token...
+2026-03-14T10:54:54.466Z [INFO] Processing batch 1/1, size: 2
+2026-03-14T10:54:54.470Z [INFO] Proxy configuration: HTTPS_PROXY=(not set), HTTP_PROXY=(not set), NO_PROXY=(not set), NODE_EXTRA_CA_CERTS=(not set), vscode http.proxy=(not set), hasProxy=false
+2026-03-14T10:54:54.471Z [INFO] No proxy detected, using direct connection.
+2026-03-14T10:54:54.476Z [INFO] listing CVEs from GitHub for dependencies [
+  "org.springframework.boot:spring-boot-starter-web:3.2.6",
+  "org.springframework.boot:spring-boot-devtools:3.2.6"
+]
+2026-03-14T10:54:54.841Z [INFO] Fetched 0 total advisories across all pages
+2026-03-14T10:54:54.843Z [INFO] grouping CVEs and finding max patched version by dep...
+2026-03-14T10:54:54.844Z [INFO] done getting 0 CVEs for 2 dependencies
+2026-03-14T10:54:54.845Z [INFO] calculating patched version by dep...
+2026-03-14T10:54:54.846Z [INFO] finished getting CVEs for dependencies.
+2026-03-14T10:54:54.847Z [INFO] Found 0 dependencies with known CVEs
+2026-03-14T10:54:54.848Z [INFO] No known CVEs that need to be fixed are found for dependencies: org.springframework.boot:spring-boot-starter-web:3.2.6,org.springframework.boot:spring-boot-devtools:3.2.6
+2026-03-14T10:54:54.850Z [INFO] [Tool.invoke]({result: {
+  "message": "No known CVEs that need to be fixed are found for the given dependencies."
+}}).
+2026-03-14T10:54:54.851Z [INFO] ----------------------invoked validate_cves_for_java----------------------
+2026-03-14T10:57:39.399Z [INFO] ---------------------prepare report_event----------------------
+2026-03-14T10:57:39.401Z [INFO] [Tool.prepareInvocation]({name: report_event, input: {
+  "sessionId": "20260314103946",
+  "projectPath": "c:\\Users\\Asus\\OneDrive\\Desktop\\boss folder\\sigma web d\\rubic_cube-main",
+  "event": "summaryGenerated",
+  "phase": "summarize",
+  "status": "succeeded",
+  "message": "Java upgrade to 21 completed with successful compilation and 100% test pass rate."
+}}).
+2026-03-14T10:57:39.403Z [INFO] [Tool.prepareInvocation] do prepare invocation.
+2026-03-14T10:57:39.404Z [INFO] [Tool.prepareInvocation]({result: {
+  "invocationMessage": "Report upgrade event"
+}}).
+2026-03-14T10:57:39.405Z [INFO] ----------------------prepared report_event----------------------
+2026-03-14T10:57:39.538Z [INFO] ----------------------invoke report_event----------------------
+2026-03-14T10:57:39.539Z [INFO] [Tool.invoke]({name: report_event, input: {
+  "sessionId": "20260314103946",
+  "projectPath": "c:\\Users\\Asus\\OneDrive\\Desktop\\boss folder\\sigma web d\\rubic_cube-main",
+  "event": "summaryGenerated",
+  "phase": "summarize",
+  "status": "succeeded",
+  "message": "Java upgrade to 21 completed with successful compilation and 100% test pass rate."
+}}).
+2026-03-14T10:57:39.540Z [INFO] [Tool.invoke] do invoke.
+2026-03-14T10:57:39.703Z [INFO] [Tool.invoke]({result: {
+  "message": "Event 'summaryGenerated' reported!\nSession ID: 20260314103946,\nSession Dir: c:\\Users\\Asus\\OneDrive\\Desktop\\boss folder\\sigma web d\\rubic_cube-main\\.github\\java-upgrade\\20260314103946"
+}}).
+2026-03-14T10:57:39.704Z [INFO] ----------------------invoked report_event----------------------
