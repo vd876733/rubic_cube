@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import { useState, useImperativeHandle, forwardRef } from 'react'
+=======
+import { FC, useState, useImperativeHandle, forwardRef } from 'react'
+>>>>>>> 193caf26bf187b01d88eec40839f915b991654d8
 
 interface VerticalPaletteProps {
   selectedColor: string | null

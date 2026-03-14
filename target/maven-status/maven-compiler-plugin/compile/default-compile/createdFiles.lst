@@ -1,0 +1,5 @@
+com/example/rubikssolver/controller/CubeController.class
+com/example/rubikssolver/model/CubeModel.class
+com/example/rubikssolver/RubiksSolverApplication.class
+com/example/rubikssolver/model/Step.class
+com/example/rubikssolver/service/SolverService.class

@@ -1,23 +1,12 @@
-import { useCallback, useRef, useEffect } from 'react'
+import { FC, useCallback, useRef, useEffect } from 'react'
 import gsap from 'gsap'
 
-interface CubeSceneHandle {
-  rotateCube: (axis: 'x' | 'y' | 'z', angle: number, duration?: number) => Promise<void>
-  blinkFace: (faceIndex: number, duration?: number) => Promise<void>
-}
-
-interface SolutionStep {
-  rotationAxis: 'x' | 'y' | 'z'
-  rotationAmount: number
-  faceIndex: number
-}
-
 interface AlgorithmDetailsProps {
-  moves: string[]
+  moves: string[] 
   currentMoveIndex: number
-  steps?: SolutionStep[]
-  cubeRefs?: React.RefObject<{ mirrorCube: CubeSceneHandle; instructorCube: CubeSceneHandle }>
-  onMoveClick?: (index: number) => void
+  steps?: any[]
+  cubeRefs?: React.RefObject<{ mirrorCube: any; instructorCube: any }>
+  onMoveClick?: (index: number) => void 
 }
 
 /**
@@ -25,13 +14,13 @@ interface AlgorithmDetailsProps {
  * Shows current step highlighting and allows navigation through the solution
  * Animates cube rotations using GSAP for smooth 90-degree turns
  */
-export function AlgorithmDetails({
+export const AlgorithmDetails: FC<AlgorithmDetailsProps> = ({
   moves,
   currentMoveIndex,
   steps = [],
   cubeRefs,
   onMoveClick,
-}: AlgorithmDetailsProps) {
+}: AlgorithmDetailsProps) => {
   const animationRef = useRef<gsap.core.Tween | null>(null)
   const moveAnimationRef = useRef<Promise<void> | null>(null)
 
@@ -55,11 +44,14 @@ export function AlgorithmDetails({
         // Animate the cube rotation with GSAP for smooth motion
         await gsap.to({}, {
           duration,
-          onComplete: async () => {
+          onComplete: () => {
             // Execute the rotation after GSAP animation frame
-            await cube.rotateCube(step.rotationAxis, step.rotationAmount, duration)
-            // Blink the face being rotated
-            cube.blinkFace(step.faceIndex, 0.5)
+            cube.rotateCube(step.rotationAxis, step.rotationAmount, duration).then(() => {
+              // Blink the face being rotated
+              cube.blinkFace(step.faceIndex, 0.5)
+            }).catch((error) => {
+              console.error('Animation error:', error)
+            })
           },
         })
 

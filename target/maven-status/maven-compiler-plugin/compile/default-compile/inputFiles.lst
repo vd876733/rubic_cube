@@ -1,0 +1,5 @@
+/workspaces/rubic_cube/src/main/java/com/example/rubikssolver/RubiksSolverApplication.java
+/workspaces/rubic_cube/src/main/java/com/example/rubikssolver/service/SolverService.java
+/workspaces/rubic_cube/src/main/java/com/example/rubikssolver/model/Step.java
+/workspaces/rubic_cube/src/main/java/com/example/rubikssolver/model/CubeModel.java
+/workspaces/rubic_cube/src/main/java/com/example/rubikssolver/controller/CubeController.java

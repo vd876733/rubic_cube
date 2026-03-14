@@ -1,7 +1,7 @@
 import { useRef, useCallback, useState, useEffect } from 'react'
 import useSolverStore from './store/solverStore'
 import { cubeAPI } from './utils/api'
-import { ProgressTimeline, CanvasContainer, ControlPanel } from './components'
+import { ProgressTimeline, CanvasContainer, AlgorithmDetails, ControlPanel } from './components'
 
 interface CubeSceneHandle {
   rotateCube: (axis: 'x' | 'y' | 'z', angle: number, duration?: number) => Promise<void>
@@ -50,7 +50,6 @@ export default function App() {
       // Extract moves from steps
       const extractedMoves = response.steps.map((step: SolverStep) => step.move)
       setMoves(extractedMoves)
-
       setSteps(response.steps)
       setCurrentStepIndex(0)
       setIsPlaying(false)

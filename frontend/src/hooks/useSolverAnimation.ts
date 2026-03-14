@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import { useRef, useCallback, useState, RefObject } from 'react'
+=======
+import { useRef, useCallback, useState } from 'react'
+>>>>>>> 193caf26bf187b01d88eec40839f915b991654d8
 
 /**
  * Step object matching the Spring Boot backend Step.java
@@ -56,6 +60,7 @@ interface UseSolverAnimationProps {
   onStepChange?: (stepIndex: number, step: SolverStep | null) => void
 }
 
+<<<<<<< HEAD
 interface CubeSceneHandle {
   rotateCube: (axis: 'x' | 'y' | 'z', angle: number, duration?: number) => Promise<void>
   blinkFace: (faceIndex: number, duration?: number) => Promise<void>
@@ -63,6 +68,10 @@ interface CubeSceneHandle {
 
 interface UseSolverAnimationReturn {
   playSequence: (steps: SolverStep[], cubeRef: RefObject<CubeSceneHandle>, onStepComplete?: () => void) => Promise<void>
+=======
+interface UseSolverAnimationReturn {
+  playSequence: (steps: SolverStep[], cubeRef: any, onStepComplete?: () => void) => Promise<void>
+>>>>>>> 193caf26bf187b01d88eec40839f915b991654d8
   isPlaying: boolean
   currentStepIndex: number
   pauseAnimation: () => void
@@ -99,7 +108,11 @@ export const useSolverAnimation = ({
    * Execute a single step with rotation and blink effects
    */
   const executeStep = useCallback(
+<<<<<<< HEAD
     async (step: SolverStep, cubeRef: RefObject<CubeSceneHandle>, stepDelay: number = 1.0) => {
+=======
+    async (step: SolverStep, cubeRef: any, stepDelay: number = 1.0) => {
+>>>>>>> 193caf26bf187b01d88eec40839f915b991654d8
       if (cancelRef.current) return
 
       const moveKey = step.move.replace(/[2']/g, '') // Extract base move (U, D, L, R, F, B)
@@ -141,7 +154,11 @@ export const useSolverAnimation = ({
    * Play through an entire sequence of solver steps
    */
   const playSequence = useCallback(
+<<<<<<< HEAD
     async (steps: SolverStep[], cubeRef: RefObject<CubeSceneHandle>, onStepComplete?: () => void) => {
+=======
+    async (steps: SolverStep[], cubeRef: any, onStepComplete?: () => void) => {
+>>>>>>> 193caf26bf187b01d88eec40839f915b991654d8
       if (!cubeRef.current) {
         throw new Error('Cube reference not available')
       }

@@ -7,6 +7,7 @@ interface ProgressTimelineProps {
   onStepClick?: (index: number) => void
 }
 
+<<<<<<< HEAD
 type TimelineItem = {
   index: number
   label: string
@@ -21,6 +22,15 @@ export function ProgressTimeline({
 }: ProgressTimelineProps) {
   const timelineItems = useMemo<TimelineItem[]>(() => {
     return steps.map((step, idx) => ({
+=======
+export const ProgressTimeline: React.FC<ProgressTimelineProps> = ({
+  steps,
+  currentStep,
+  onStepClick,
+}) => {
+  const timelineItems = useMemo(() => {
+    return steps.map((step: string, idx: number) => ({
+>>>>>>> 193caf26bf187b01d88eec40839f915b991654d8
       index: idx,
       label: step,
       isActive: idx === currentStep,
@@ -41,7 +51,11 @@ export function ProgressTimeline({
       {/* Timeline */}
       <div className="flex-1 p-6">
         <div className="space-y-2">
+<<<<<<< HEAD
           {timelineItems.map((item, idx) => (
+=======
+          {timelineItems.map((item: any, idx: number) => (
+>>>>>>> 193caf26bf187b01d88eec40839f915b991654d8
             <div
               key={item.index}
               className="relative"
@@ -69,7 +83,11 @@ export function ProgressTimeline({
                       : 'bg-gray-700 ring-1 ring-gray-600',
                   'group-hover:scale-110'
                 )}>
+<<<<<<< HEAD
                   {item.isCompleted && !item.isActive && (
+=======
+                  {item.isCompleted && item.index !== item.index && (
+>>>>>>> 193caf26bf187b01d88eec40839f915b991654d8
                     <span className="text-white text-xs font-bold">✓</span>
                   )}
                 </div>
