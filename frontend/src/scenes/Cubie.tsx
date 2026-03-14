@@ -1,8 +1,5 @@
 import { useMemo, useRef, useCallback } from 'react'
-<<<<<<< HEAD
 import type { PointerEvent } from 'react'
-=======
->>>>>>> 193caf26bf187b01d88eec40839f915b991654d8
 import * as THREE from 'three'
 import { RoundedBoxGeometry } from 'three/examples/jsm/geometries/RoundedBoxGeometry'
 
@@ -46,11 +43,7 @@ export const Cubie: React.FC<CubieProps> = ({
   const mouse = useMemo(() => new THREE.Vector2(), [])
 
   const handlePointerMove = useCallback(
-<<<<<<< HEAD
     (event: PointerEvent) => {
-=======
-    (event: any) => {
->>>>>>> 193caf26bf187b01d88eec40839f915b991654d8
       if (!isInteractive || !groupRef.current) return
 
       mouse.x = (event.clientX / window.innerWidth) * 2 - 1
@@ -62,11 +55,7 @@ export const Cubie: React.FC<CubieProps> = ({
   )
 
   const handlePointerClick = useCallback(
-<<<<<<< HEAD
     (event: PointerEvent) => {
-=======
-    (event: any) => {
->>>>>>> 193caf26bf187b01d88eec40839f915b991654d8
       if (!isInteractive || !groupRef.current) return
 
       mouse.x = (event.clientX / window.innerWidth) * 2 - 1
@@ -131,7 +120,6 @@ export const Cubie: React.FC<CubieProps> = ({
 
       {/* Facelets */}
       {faceMeshes.map((mesh: THREE.Mesh, idx: number) => (
-<<<<<<< HEAD
         <primitive
           key={idx}
           object={mesh}
@@ -139,9 +127,6 @@ export const Cubie: React.FC<CubieProps> = ({
             if (el) cubiesRef.current[idx] = el
           }}
         />
-=======
-        <primitive key={idx} object={mesh} ref={(el: any) => (cubiesRef.current[idx] = el)} />
->>>>>>> 193caf26bf187b01d88eec40839f915b991654d8
       ))}
     </group>
   )
