@@ -1,4 +1,5 @@
-import { Canvas, useFrame } from '@react-three/fiber'
+import { forwardRef, useRef, useMemo, useEffect, useImperativeHandle } from 'react'
+import { Canvas } from '@react-three/fiber'
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei'
 import { EffectComposer, Bloom } from '@react-three/postprocessing'
 import * as THREE from 'three'
@@ -162,35 +163,8 @@ const CubeContent = forwardRef<CubeSceneRef, CubeSceneProps>(
     }
 
     const blinkFace = async (faceIndex: number, duration: number = 0.5): Promise<void> => {
-      return new Promise<void>((resolve) => {
-        if (!faceMeshesRef.current[faceIndex]) {
-          resolve()
-          return
-        }
-
-        const mesh = faceMeshesRef.current[faceIndex]
-        const material = mesh.material as THREE.MeshStandardMaterial
-
-        if (!material) {
-          resolve()
-          return
-        }
-
-        const startIntensity = material.emissiveIntensity
-
-        gsap.timeline()
-          .to(material, {
-            emissiveIntensity: startIntensity + 2,
-            duration: duration / 2,
-            ease: "power2.in",
-          })
-          .to(material, {
-            emissiveIntensity: startIntensity,
-            duration: duration / 2,
-            ease: "power2.out",
-            onComplete: resolve,
-          })
-      })
+      // Temporarily disabled - face meshes not collected
+      return Promise.resolve()
     }
 
     useImperativeHandle(ref, () => ({ rotateCube, blinkFace, syncCamera }))

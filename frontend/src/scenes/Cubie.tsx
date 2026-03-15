@@ -1,7 +1,6 @@
 import { useMemo, useRef, useCallback } from 'react'
 import type { PointerEvent } from 'react'
 import * as THREE from 'three'
-import { RoundedBoxGeometry } from 'three/examples/jsm/geometries/RoundedBoxGeometry'
 
 interface CubieProps {
   position: [number, number, number]
@@ -108,7 +107,7 @@ export const Cubie: React.FC<CubieProps> = ({
   return (
     <group ref={groupRef} position={position} onPointerMove={handlePointerMove} onClick={handlePointerClick}>
       {/* Black edge/frame */}
-      <mesh geometry={new RoundedBoxGeometry(1, 1, 1, 4, 0.05)}>
+      <mesh geometry={new THREE.BoxGeometry(1, 1, 1)}>
         <meshStandardMaterial
           color="#111827"
           metalness={0.5}
