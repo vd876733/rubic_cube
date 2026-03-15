@@ -1,4 +1,8 @@
+
 import { useState, useImperativeHandle, forwardRef } from 'react'
+
+import { FC, useState, useImperativeHandle, forwardRef } from 'react'
+
 
 interface ColorPaletteProps {
   selectedColor: string | null

@@ -1,8 +1,8 @@
-<<<<<<< HEAD
+
 import { useRef, useCallback, useState, RefObject } from 'react'
-=======
+
 import { useRef, useCallback, useState } from 'react'
->>>>>>> 193caf26bf187b01d88eec40839f915b991654d8
+
 
 /**
  * Step object matching the Spring Boot backend Step.java

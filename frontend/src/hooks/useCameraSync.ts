@@ -37,19 +37,19 @@ export const useCameraSync = (
     // to get the actual camera position from the three.js scene.
     // For now, we'll use a simplified approach that the instructor
     // component can subscribe to rotation events from the mirror component.
-<<<<<<< HEAD
+
 
     if (instructorCubeRef.current && instructorCubeRef.current.syncCamera) {
       instructorCubeRef.current.syncCamera(lastCameraPosRef.current, lastZoomRef.current)
     }
   }, [instructorCubeRef])
-=======
+
     
     if (instructorCubeRef.current && instructorCubeRef.current.syncCamera) {
       instructorCubeRef.current.syncCamera(lastCameraPosRef.current, lastZoomRef.current)
     }
   }, [])
->>>>>>> 193caf26bf187b01d88eec40839f915b991654d8
+
 
   /**
    * Start continuous camera synchronization

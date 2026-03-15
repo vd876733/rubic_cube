@@ -44,14 +44,11 @@ export const AlgorithmDetails: FC<AlgorithmDetailsProps> = ({
         // Animate the cube rotation with GSAP for smooth motion
         await gsap.to({}, {
           duration,
-          onComplete: () => {
+          onComplete: async () => {
             // Execute the rotation after GSAP animation frame
-            cube.rotateCube(step.rotationAxis, step.rotationAmount, duration).then(() => {
-              // Blink the face being rotated
-              cube.blinkFace(step.faceIndex, 0.5)
-            }).catch((error) => {
-              console.error('Animation error:', error)
-            })
+            await cube.rotateCube(step.rotationAxis, step.rotationAmount, duration)
+            // Blink the face being rotated
+            cube.blinkFace(step.faceIndex, 0.5)
           },
         })
 
