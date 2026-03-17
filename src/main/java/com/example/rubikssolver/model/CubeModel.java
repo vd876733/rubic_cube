@@ -1,5 +1,5 @@
 package com.example.rubikssolver.model;
-
+ 
 /**
  * Represents the state of a Rubik's Cube with 54 stickers.
  * 

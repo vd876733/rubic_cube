@@ -1,7 +1,6 @@
 import { FC, useCallback, useRef, useEffect } from 'react'
 import gsap from 'gsap'
-
-interface AlgorithmDetailsProps {
+ 
   moves: string[] 
   currentMoveIndex: number
   steps?: any[]
