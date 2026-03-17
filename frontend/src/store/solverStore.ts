@@ -23,7 +23,15 @@ interface SolverStore {
 }
 
 export const useSolverStore = create<SolverStore>((set) => ({
-  cubeState: 'WWWWWWWWWYYYYYYYYYBBBBBBBBBGGGGGGGGGRRRRRRRRROOOOOOOOO',
+  cubeState: 'X'.repeat(54).split('').map((char, index) => {
+    if (index === 4) return 'W';
+    if (index === 13) return 'R';
+    if (index === 22) return 'G';
+    if (index === 31) return 'Y';
+    if (index === 40) return 'O';
+    if (index === 49) return 'B';
+    return 'X';
+  }).join(''),
   steps: [],
   currentStepIndex: 0,
   isPlaying: false,
@@ -47,7 +55,15 @@ export const useSolverStore = create<SolverStore>((set) => ({
     set({
       currentStepIndex: 0,
       isPlaying: false,
-      cubeState: 'WWWWWWWWWYYYYYYYYYBBBBBBBBBGGGGGGGGGRRRRRRRRROOOOOOOOO',
+      cubeState: 'X'.repeat(54).split('').map((char, index) => {
+        if (index === 4) return 'W';
+        if (index === 13) return 'R';
+        if (index === 22) return 'G';
+        if (index === 31) return 'Y';
+        if (index === 40) return 'O';
+        if (index === 49) return 'B';
+        return 'X';
+      }).join(''),
     }),
 }))
 

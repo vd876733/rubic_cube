@@ -1,10 +1,15 @@
 import { useMemo, useRef } from 'react'
 import * as THREE from 'three'
 
+interface CubieFace {
+  color: string
+  normal: THREE.Vector3
+  globalIndex: number
+}
+
 interface CubieProps {
   position: [number, number, number]
-  facelets: string[]
-  globalIndices: number[]
+  faces: CubieFace[]
   onSticker?: (globalIndex: number) => void
   isInteractive?: boolean
 }
@@ -30,8 +35,7 @@ const FACE_NORMALS = [
 
 export const Cubie: React.FC<CubieProps> = ({
   position,
-  facelets,
-  globalIndices,
+  faces,
   onSticker,
   isInteractive = false,
 }) => {
@@ -40,14 +44,13 @@ export const Cubie: React.FC<CubieProps> = ({
 
   const faceletsData = useMemo(
     () =>
-      facelets.map((color, index) => {
-        return {
-          hexColor: FACE_COLORS[color] || '#CCCCCC',
-          normal: FACE_NORMALS[index],
-          globalIndex: globalIndices[index],
-        }
-      }),
-    [facelets, globalIndices]
+      faces.map((face) => ({
+        hexColor: face.color === 'X' ? '#2d2d2d' : FACE_COLORS[face.color] || '#CCCCCC',
+        normal: face.normal,
+        globalIndex: face.globalIndex,
+        isBlank: face.color === 'X',
+      })),
+    [faces]
   )
 
   return (
@@ -78,12 +81,14 @@ export const Cubie: React.FC<CubieProps> = ({
           <meshStandardMaterial
             color={face.hexColor}
             emissive={face.hexColor}
-            emissiveIntensity={1.5}
+            emissiveIntensity={face.isBlank ? 0.5 : 1.5}
             metalness={0.3}
             roughness={0.2}
             toneMapped={false}
             side={THREE.FrontSide}
             flatShading
+            transparent={face.isBlank}
+            opacity={face.isBlank ? 0.7 : 1}
           />
         </mesh>
       ))}

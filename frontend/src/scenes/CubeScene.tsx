@@ -41,11 +41,16 @@ const CubeContent = forwardRef<CubeSceneRef, CubeSceneProps>(
     }
 
     // Generate cubies for 3x3x3 cube
+    interface CubieFace {
+      color: string
+      normal: THREE.Vector3
+      globalIndex: number
+    }
+
     interface CubieData {
       position: [number, number, number]
-      facelets: string[]
+      faces: CubieFace[]
       isCenter: boolean
-      globalIndices: number[]
     }
 
     const cubies = useMemo((): CubieData[] => {
@@ -55,64 +60,79 @@ const CubeContent = forwardRef<CubeSceneRef, CubeSceneProps>(
       for (let x = -1; x <= 1; x++) {
         for (let y = -1; y <= 1; y++) {
           for (let z = -1; z <= 1; z++) {
-            const facelets: string[] = []
-
-            const globalIndices: number[] = []
+            const faces: CubieFace[] = []
             
             // Right face (x = 1) - Red [Face 4: indices 36-44]
             if (x === 1) {
               const row = (1 - y)
               const col = (z + 1)
               const idx = row * 3 + col
-              facelets.push(faceColors[4][idx] || 'R')
-              globalIndices.push(36 + idx)
+              faces.push({
+                color: faceColors[4][idx] || 'R',
+                normal: new THREE.Vector3(1, 0, 0),
+                globalIndex: 36 + idx
+              })
             }
             // Left face (x = -1) - Orange [Face 5: indices 45-53]
             if (x === -1) {
               const row = (1 - y)
               const col = (1 - z)
               const idx = row * 3 + col
-              facelets.push(faceColors[5][idx] || 'O')
-              globalIndices.push(45 + idx)
+              faces.push({
+                color: faceColors[5][idx] || 'O',
+                normal: new THREE.Vector3(-1, 0, 0),
+                globalIndex: 45 + idx
+              })
             }
             // Top face (y = 1) - White [Face 0: indices 0-8]
             if (y === 1) {
               const row = (1 - z)
               const col = (x + 1)
               const idx = row * 3 + col
-              facelets.push(faceColors[0][idx] || 'W')
-              globalIndices.push(0 + idx)
+              faces.push({
+                color: faceColors[0][idx] || 'W',
+                normal: new THREE.Vector3(0, 1, 0),
+                globalIndex: 0 + idx
+              })
             }
             // Bottom face (y = -1) - Yellow [Face 1: indices 9-17]
             if (y === -1) {
               const row = z + 1
               const col = (x + 1)
               const idx = row * 3 + col
-              facelets.push(faceColors[1][idx] || 'Y')
-              globalIndices.push(9 + idx)
+              faces.push({
+                color: faceColors[1][idx] || 'Y',
+                normal: new THREE.Vector3(0, -1, 0),
+                globalIndex: 9 + idx
+              })
             }
             // Front face (z = 1) - Blue [Face 2: indices 18-26]
             if (z === 1) {
               const row = (1 - y)
               const col = (x + 1)
               const idx = row * 3 + col
-              facelets.push(faceColors[2][idx] || 'B')
-              globalIndices.push(18 + idx)
+              faces.push({
+                color: faceColors[2][idx] || 'B',
+                normal: new THREE.Vector3(0, 0, 1),
+                globalIndex: 18 + idx
+              })
             }
             // Back face (z = -1) - Green [Face 3: indices 27-35]
             if (z === -1) {
               const row = (1 - y)
               const col = (1 - x)
               const idx = row * 3 + col
-              facelets.push(faceColors[3][idx] || 'G')
-              globalIndices.push(27 + idx)
+              faces.push({
+                color: faceColors[3][idx] || 'G',
+                normal: new THREE.Vector3(0, 0, -1),
+                globalIndex: 27 + idx
+              })
             }
 
             result.push({
               position: [x * 1.2, y * 1.2, z * 1.2],
-              facelets,
+              faces,
               isCenter: Math.abs(x) + Math.abs(y) + Math.abs(z) === 2,
-              globalIndices,
             })
           }
         }
@@ -224,8 +244,7 @@ const CubeContent = forwardRef<CubeSceneRef, CubeSceneProps>(
             <Cubie
               key={idx}
               position={cubie.position}
-              facelets={cubie.facelets}
-              globalIndices={cubie.globalIndices}
+              faces={cubie.faces}
               isInteractive={isMirror}
               onSticker={
                 isMirror && onStickerChange
