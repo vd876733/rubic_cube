@@ -209,6 +209,16 @@ const CubeContent = forwardRef<CubeSceneRef, CubeSceneProps>(
         <pointLight position={[-10, -10, 10]} intensity={0.8} color="#0099ff" />
         <pointLight position={[0, 10, 0]} intensity={0.6} color="#ff0099" />
 
+        {/* Debug helpers: should be visible if the scene is rendering */}
+        <axesHelper args={[3]} />
+        <gridHelper args={[10, 10, '#444444', '#888888']} />
+
+        {/* Simple visible cube to confirm render */}
+        <mesh position={[0, 0, 0]}>
+          <boxGeometry args={[1.8, 1.8, 1.8]} />
+          <meshStandardMaterial color="hotpink" opacity={0.75} transparent />
+        </mesh>
+
         <group ref={cubeGroupRef}>
           {cubies.map((cubie: CubieData, idx: number) => (
             <Cubie
@@ -248,11 +258,13 @@ export const CubeScene = forwardRef<
 >(({ cubeState, isMirror, onStickerChange, onRotate, onCameraSync }, ref) => {
   return (
     <Canvas
+      style={{ width: '100%', height: '100%' }}
       gl={{
         antialias: true,
         alpha: true,
         powerPreference: 'high-performance',
       }}
+      dpr={[1, 2]}
     >
       <CubeContent ref={ref} cubeState={cubeState} isMirror={isMirror} onStickerChange={onStickerChange} onRotate={onRotate} onCameraSync={onCameraSync} />
     </Canvas>

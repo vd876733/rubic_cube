@@ -131,7 +131,7 @@ export default function App() {
         </div>
 
         {/* Center Panel - Dual 3D Canvases */}
-        <div className="overflow-hidden">
+        <div className="overflow-hidden h-full">
           <CanvasContainer
             ref={canvasContainerRef}
             cubeState={cubeState}

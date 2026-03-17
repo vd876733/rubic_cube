@@ -1,5 +1,4 @@
-import { useMemo, useRef, useCallback } from 'react'
-import type { PointerEvent } from 'react'
+import { useMemo, useRef } from 'react'
 import * as THREE from 'three'
 
 interface CubieProps {
@@ -37,75 +36,22 @@ export const Cubie: React.FC<CubieProps> = ({
   isInteractive = false,
 }) => {
   const groupRef = useRef<THREE.Group>(null)
-  const cubiesRef = useRef<THREE.Mesh[]>([])
-  const raycaster = useMemo(() => new THREE.Raycaster(), [])
-  const mouse = useMemo(() => new THREE.Vector2(), [])
+  const size = 0.95
 
-  const handlePointerMove = useCallback(
-    (event: PointerEvent) => {
-      if (!isInteractive || !groupRef.current) return
-
-      mouse.x = (event.clientX / window.innerWidth) * 2 - 1
-      mouse.y = -(event.clientY / window.innerHeight) * 2 + 1
-
-      raycaster.setFromCamera(mouse, new THREE.PerspectiveCamera())
-    },
-    [isInteractive, raycaster, mouse]
-  )
-
-  const handlePointerClick = useCallback(
-    (event: PointerEvent) => {
-      if (!isInteractive || !groupRef.current) return
-
-      mouse.x = (event.clientX / window.innerWidth) * 2 - 1
-      mouse.y = -(event.clientY / window.innerHeight) * 2 + 1
-
-      raycaster.setFromCamera(mouse, new THREE.PerspectiveCamera())
-      const intersects = raycaster.intersectObjects(cubiesRef.current)
-
-      if (intersects.length > 0) {
-        const intersection = intersects[0]
-        const localFaceIndex = cubiesRef.current.indexOf(intersection.object as THREE.Mesh)
-        if (onSticker && localFaceIndex !== -1 && globalIndices[localFaceIndex] !== undefined) {
-          const globalIndex = globalIndices[localFaceIndex]
-          onSticker(globalIndex)
+  const faceletsData = useMemo(
+    () =>
+      facelets.map((color, index) => {
+        return {
+          hexColor: FACE_COLORS[color] || '#CCCCCC',
+          normal: FACE_NORMALS[index],
+          globalIndex: globalIndices[index],
         }
-      }
-    },
-    [isInteractive, onSticker, raycaster, mouse, globalIndices]
+      }),
+    [facelets, globalIndices]
   )
-
-  const faceMeshes = useMemo(() => {
-    const size = 0.95
-    const meshes = facelets.map((color: string, index: number) => {
-      const geometry = new THREE.PlaneGeometry(size, size)
-      const hexColor = FACE_COLORS[color] || '#CCCCCC'
-      
-      // Create material with enhanced emissive properties for neon glow effect
-      const material = new THREE.MeshStandardMaterial({
-        color: hexColor,
-        emissive: hexColor,
-        emissiveIntensity: 1.5, // Enhanced glow intensity for Bloom effect
-        metalness: 0.3, // Slight metallic sheen
-        roughness: 0.2, // Smooth surface for reflections
-        toneMapped: false, // Ensure emissive colors aren't tone-mapped
-        side: THREE.FrontSide,
-        flatShading: true, // Crisp sticker appearance
-      })
-
-      const mesh = new THREE.Mesh(geometry, material)
-      mesh.position.copy(FACE_NORMALS[index].multiplyScalar(0.5))
-      mesh.lookAt(FACE_NORMALS[index])
-      mesh.userData.originalEmissiveIntensity = 1.5 // Store for blinking effects
-
-      return mesh
-    })
-
-    return meshes
-  }, [facelets])
 
   return (
-    <group ref={groupRef} position={position} onPointerMove={handlePointerMove} onClick={handlePointerClick}>
+    <group ref={groupRef} position={position}>
       {/* Black edge/frame */}
       <mesh geometry={new THREE.BoxGeometry(1, 1, 1)}>
         <meshStandardMaterial
@@ -118,14 +64,28 @@ export const Cubie: React.FC<CubieProps> = ({
       </mesh>
 
       {/* Facelets */}
-      {faceMeshes.map((mesh: THREE.Mesh, idx: number) => (
-        <primitive
+      {faceletsData.map((face, idx) => (
+        <mesh
           key={idx}
-          object={mesh}
-          ref={(el: THREE.Mesh | null) => {
-            if (el) cubiesRef.current[idx] = el
-          }}
-        />
+          position={[face.normal.x * 0.5, face.normal.y * 0.5, face.normal.z * 0.5]}
+          onClick={() => isInteractive && onSticker?.(face.globalIndex)}
+          onPointerOver={(e) => e.stopPropagation()}
+          onPointerDown={(e) => e.stopPropagation()}
+          onPointerUp={(e) => e.stopPropagation()}
+          onUpdate={(self) => self.lookAt(self.position.clone().add(face.normal))}
+        >
+          <planeGeometry args={[size, size]} />
+          <meshStandardMaterial
+            color={face.hexColor}
+            emissive={face.hexColor}
+            emissiveIntensity={1.5}
+            metalness={0.3}
+            roughness={0.2}
+            toneMapped={false}
+            side={THREE.FrontSide}
+            flatShading
+          />
+        </mesh>
       ))}
     </group>
   )
