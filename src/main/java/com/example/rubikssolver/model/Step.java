@@ -1,52 +1,11 @@
 package com.example.rubikssolver.model;
 
-public class Step {
-    private String instruction;
-    private String move;
-    private boolean isClockwise;
-    private String faceToBlink;
-
-    public Step() {
-    }
-
-    public Step(String instruction, String move, boolean isClockwise, String faceToBlink) {
-        this.instruction = instruction;
-        this.move = move;
-        this.isClockwise = isClockwise;
-        this.faceToBlink = faceToBlink;
-    }
-
-    public String getInstruction() {
-        return instruction;
-    }
-
-    public void setInstruction(String instruction) {
-        this.instruction = instruction;
-    }
-
-    public String getMove() {
-        return move;
-    }
-
-    public void setMove(String move) {
-        this.move = move;
-    }
-
-    public boolean isClockwise() {
-        return isClockwise;
-    }
-
-    public void setClockwise(boolean clockwise) {
-        isClockwise = clockwise;
-    }
-
-    public String getFaceToBlink() {
-        return faceToBlink;
-    }
-
-    public void setFaceToBlink(String faceToBlink) {
-        this.faceToBlink = faceToBlink;
-    }
+public record Step(
+    String move,
+    String rotationAxis,
+    Double rotationAmount,
+    Integer faceIndex
+) {}
 
     @Override
     public String toString() {

@@ -1,6 +1,7 @@
 package com.example.rubikssolver.service;
 
 import com.example.rubikssolver.model.Step;
+import cs.min2phase.Search;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -18,44 +19,75 @@ public class SolverService {
     public List<Step> getSolution(String cubeState) {
         // sanity check the input
         if (cubeState == null || cubeState.length() != 54) {
-            throw new IllegalArgumentException("cubeState must be a 54‑character string");
+            throw new IllegalArgumentException("cubeState must be a 54-character string");
         }
 
+        // Initialize the min2phase solver
+        Search.init();
+
+        // Solve the cube
+        String solution = new Search().solve(cubeState);
+
+        if (solution.startsWith("Error")) {
+            throw new IllegalArgumentException("Invalid cube state: " + solution);
+        }
+
+        // Parse the solution string into steps
         List<Step> steps = new ArrayList<>();
+        String[] moves = solution.split(" ");
 
-        // ------------------------------------------------------------
-        // stub solver logic: examine the string and produce descriptive
-        // steps.  a real implementation would call a cube‑solving library
-        // or algorithm; this is enough to exercise the UI/back‑end
-        // integration.
-        // ------------------------------------------------------------
-
-        // example: if the very first sticker is not white, rotate U
-        if (cubeState.charAt(0) != 'W') {
-            steps.add(new Step(
-                    "Bring white sticker into position",
-                    "U",
-                    true,
-                    "U"
-            ));
+        for (String move : moves) {
+            if (move.isEmpty()) continue;
+            steps.add(parseMove(move));
         }
-
-        // always include a couple of fixed moves so the front end has
-        // something to display
-        steps.add(new Step(
-                "Rotate the Right face clockwise",
-                "R",
-                true,
-                "R"
-        ));
-
-        steps.add(new Step(
-                "Perform a front double‑turn",
-                "F2",
-                true,
-                "F"
-        ));
 
         return steps;
+    }
+
+    private Step parseMove(String move) {
+        char face = move.charAt(0);
+        boolean isPrime = move.contains("'");
+        boolean isDouble = move.contains("2");
+
+        String rotationAxis;
+        double rotationAmount;
+        int faceIndex;
+
+        switch (face) {
+            case 'U':
+                rotationAxis = "y";
+                rotationAmount = isPrime ? -Math.PI / 2 : isDouble ? Math.PI : Math.PI / 2;
+                faceIndex = 0;
+                break;
+            case 'D':
+                rotationAxis = "y";
+                rotationAmount = isPrime ? Math.PI / 2 : isDouble ? Math.PI : -Math.PI / 2;
+                faceIndex = 3;
+                break;
+            case 'R':
+                rotationAxis = "x";
+                rotationAmount = isPrime ? -Math.PI / 2 : isDouble ? Math.PI : Math.PI / 2;
+                faceIndex = 1;
+                break;
+            case 'L':
+                rotationAxis = "x";
+                rotationAmount = isPrime ? Math.PI / 2 : isDouble ? Math.PI : -Math.PI / 2;
+                faceIndex = 4;
+                break;
+            case 'F':
+                rotationAxis = "z";
+                rotationAmount = isPrime ? -Math.PI / 2 : isDouble ? Math.PI : Math.PI / 2;
+                faceIndex = 2;
+                break;
+            case 'B':
+                rotationAxis = "z";
+                rotationAmount = isPrime ? Math.PI / 2 : isDouble ? Math.PI : -Math.PI / 2;
+                faceIndex = 5;
+                break;
+            default:
+                throw new IllegalArgumentException("Unknown move: " + move);
+        }
+
+        return new Step(move, rotationAxis, rotationAmount, faceIndex);
     }
 }
